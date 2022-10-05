@@ -1,0 +1,41 @@
+{
+  "name": "doctor_appointment_booking_app",
+  "version": "1.0.0",
+  "description": "An application for patients to book appointments with the doctors of their choice",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KareemSapi/doctor_appointment_booking_app.git"
+  },
+  "keywords": [],
+  "author": "Kareem Sapi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KareemSapi/doctor_appointment_booking_app/issues"
+  },
+  "homepage": "https://github.com/KareemSapi/doctor_appointment_booking_app#readme",
+  "dependencies": {
+    "app-root-path": "^3.1.0",
+    "compression": "^1.7.4",
+    "config": "^3.3.7",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "express-validator": "^6.14.2",
+    "jsonwebtoken": "^8.5.1",
+    "mailgun-js": "^0.6.7",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.22.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.23.1",
+    "nodemon": "^2.0.20",
+    "winston": "^3.8.2"
+  }
+}
