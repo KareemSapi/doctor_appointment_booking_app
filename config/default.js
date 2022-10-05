@@ -23,23 +23,23 @@ module.exports = {
         dialect: 'postgres',
     },
     frontend: {
-        domain: `http://localhost:4200`
+        domain: ``
     },
     auth: {
         jwt: {
             algorithm            : "HS256", 
             secret               :  '6IXPSpkk3QEdXgO0OQHRznGIuClWEPum',
-            jwtAccessTokenExp    :  "10m", // 10 minutes
-            jwtRefreshTokenExp   :  "1y", //1 year
+            jwtAccessTokenExp    :  "", 
+            jwtRefreshTokenExp   :  ''
         },
         cipherHelper: {
             secret        :  '98IgGSm19ENWr3rbC1WTisIditPcksBH',
-            ttl           :  600000*3, // 30 min
+            ttl           :  '',
             algorithm     : 'aes-256-ctr',
             inputEncoding : 'utf8',
             outputEncoding: 'hex',
-            ENCRYPTION_KEY: '1TqILAWvMCLZw6kBYSwOrA1YhI8RGoE8',
-            IV_LENGTH     : 16,
+            ENCRYPTION_KEY: '',
+            IV_LENGTH     : '',
         },
     },
     logger: {
