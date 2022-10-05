@@ -42,10 +42,6 @@ module.exports = {
             IV_LENGTH     : 16,
         },
     },
-    mg : {
-        api : '93e3632268528ccc108e57fa2bb097b5-10eedde5-d674a1ab',
-        domain : 'sandboxd9c2a87ef56341119db73c6f493f65cb.mailgun.org'
-    },
     logger: {
         console: {
             level: 'debug',
