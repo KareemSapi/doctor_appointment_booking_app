@@ -48,7 +48,8 @@
     patient_feedback: {
         type: Sequelize.TEXT,
         allowNull: true
-    }
+    },
+    
  })
 
  Doctor.hasMany(Appointment, {

@@ -11,9 +11,8 @@
 
  const Sequelize = require('sequelize');
  const sequelize = require('../../db/postgreClient');
- const User = require('./Users');
 
- const Patient = sequelize.define('Doctor', {
+ const Patient = sequelize.define('Patient', {
 
     id: {
         type: Sequelize.INTEGER,

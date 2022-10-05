@@ -16,13 +16,13 @@ const config = require('config');
 const sequelize = require('./db/postgreClient');
 const cors = require('cors');
 const passport = require('passport');
-//const seedService = require('./api/models/seedService')
+const seedService = require('./api/models/seedService')
 
 require('./passport');
 
 const authRouter = require(`./api/routes/auth`);
 const userRouter = require('./api/routes/user');
-const roleRouter = require('./api/routes/role');
+//const roleRouter = require('./api/routes/role');
 const patientRouter = require('./api/routes/patient');
 const doctorRouter = require('./api/routes/doctor');
 
@@ -44,16 +44,16 @@ function clientErrorHandler(err, req, res, next) {
 app.use(cors())
 app.use(compression())
 app.use(express.json())
-//seedService
+seedService
 
-const app_name = "" || config.get('app_name.name');
+const app_name = "Doctor Appointment App" || config.get('app_details.name');
 const { port, root } = config.get('api');
 const PORT = 8080 || port
 const auth = passport.authenticate('jwt', {session: false})
 
 app.use(`${root}/auth`, authRouter);
 app.use(`${root}/user`, userRouter);
-app.use(`${root}/role`, auth, roleRouter);
+//app.use(`${root}/role`, auth, roleRouter);
 app.use(`${root}/patient`, patientRouter);
 app.use(`${root}/doctor`, auth, doctorRouter);
 

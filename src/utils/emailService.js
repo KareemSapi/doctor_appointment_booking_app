@@ -12,8 +12,8 @@
 const config = require('config');
 const mailgun = require('mailgun-js');
 const logger = require('./logger');
-const API_KEY = config.get('mg.api');
-const DOMAIN = config.get('mg.domain');
+const API_KEY = ""//config.get('mg.api');
+const DOMAIN = ""//config.get('mg.domain');
 const FRONTEND_DOMAIN = config.get('frontend.domain');
 
 const mg = mailgun({
