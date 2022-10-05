@@ -6,7 +6,7 @@
  * 
  * 
  * @lastEdit
- * Sept 27 2022, Kareem Sapi
+ * Oct 05 2022, Kareem Sapi
  */
 
 const Sequelize = require('sequelize');

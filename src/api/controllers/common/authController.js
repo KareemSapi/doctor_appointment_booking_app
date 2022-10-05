@@ -23,57 +23,42 @@
  /** 
   *@method: User registration 
   */
- exports.register_user = (req,res) => { 
+ exports.register_user = async (req,res) => { 
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
         return res.status(400).jsonp(errors.array());
     }
 
-    return Users.findOne({where: {username: `${req.body.username}`}})
-      .then(user => { 
+    try {
+      const USER = await Users.findOne({where: {username: `${req.body.username}`}})
+      
 
-        if(req.body.password !== req.body.confirmPassword){
-          return res.status(400).json({message: `passwords do not match`})
-        }
+      if(req.body.password !== req.body.confirmPassword){
+        return res.status(400).json({message: `passwords do not match`})
+      }
 
-        if(user){
-            return res.status(400).json({message: `User already exists`})
-        }
+      if(USER){
+          return res.status(400).json({message: `User already exists`})
+      }
 
-       const  passwordHash = cipher.saltHashPassword(req.body.password, req.body.username);
-        //console.log(passwordHash);
+     const  passwordHash = cipher.saltHashPassword(req.body.password, req.body.username);
+      //console.log(passwordHash);
 
-        return Users.create({
-            username: req.body.username,
-            password: passwordHash,
-        })
-        .then((response) => { 
-          const id = response.dataValues.id //user id
-  
-          const USER = {id: id, username: req.body.username,}
-  
-          const token = jwt_service.sign_jwt(USER, '30m') //create token
-          console.log(token)
-          
-          //const fullName = `${req.body.first_name} ${req.body.sur_name}`;
-
-          return res.status(201).json({message: `User succesfully created`})
-  
-          // try{          
-          //     email.send_verification_email(req.body.username, fullName, token);
-    
-          //     return res.status(201).json({msg1: `User succesfully created`, msg2: `An email containing a verification link has been sent, kindly activate your account`})
-    
-          // }catch(error){
-  
-          //     return res.status(400).json({error});
-          // }
-    
-          
-        })
+      await Users.create({
+          username: req.body.username,
+          password: passwordHash,
+          is_doctor: true,
+          is_admin: true
       })
-      .catch((error) => res.status(400).json({message: ` ${error}`}))
+
+      return res.status(201).json({message: `User succesfully created`})
+
+    } catch (error) {
+        logger.error(error);
+        return res.status(400).json({message: 'Something went wrong!!!'})
+    }
+        
  }
 
  /**

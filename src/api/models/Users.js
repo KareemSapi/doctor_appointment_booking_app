@@ -6,13 +6,14 @@
  * 
  * 
  * @lastEdit
- * Oct 01 2022, Kareem Sapi
+ * Oct 05 2022, Kareem Sapi
  */
 
 const Sequelize = require('sequelize');
 const sequelize = require('../../db/postgreClient');
-const Roles = require('./Roles');
+const Doctor = require('./Doctor');
 const Session = require('./Session');
+const Patient = require('./Patient');
 
 const User = sequelize.define('User', {
 
@@ -29,8 +30,6 @@ const User = sequelize.define('User', {
         unique: true,
     },
 
-    //salt: { type: Sequelize.STRING},
-
     password: { 
         type: Sequelize.STRING,
         allowNull: false,
@@ -40,11 +39,27 @@ const User = sequelize.define('User', {
         
     },
 
-    //user_verification_token: {type: Sequelize.STRING, defaultValue: null},
-
     is_verified: { type: Sequelize.BOOLEAN, defaultValue: true},
 
     is_approved: { type: Sequelize.BOOLEAN, defaultValue: true},
+
+    is_admin: { 
+        type: Sequelize.BOOLEAN, 
+        allowNull: false,
+        defaultValue: false
+    },
+
+    is_doctor: { 
+        type: Sequelize.BOOLEAN, 
+        allowNull: false,
+        defaultValue: false
+    },
+
+    is_patient: {
+        type: Sequelize.BOOLEAN, 
+        allowNull: false,
+        defaultValue: false
+    },
 
     is_active: { type: Sequelize.BOOLEAN},
 
@@ -52,26 +67,22 @@ const User = sequelize.define('User', {
 
     two_factor_allowed: { type: Sequelize.BOOLEAN, defaultValue: false},
 
-    // createdBy: { 
-    //     type: Sequelize.INTEGER,
-    //     allowNull: true,
-    // },
-
-    // updatedBy: { 
-    //     type: Sequelize.INTEGER,
-    //     allowNull: true,
-    // },
-
     last_login: {type: Sequelize.DATE},
 
     //paranoid: true //allow soft delete
 
 });
 
-Roles.hasMany(User, {
-    onDelete: 'NO ACTION', //do nothing instead of setting to null
+User.hasOne(Doctor, {
+    onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
-});
+})
+
+User.hasOne(Patient, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+})
+
 Session.belongsTo(User, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'

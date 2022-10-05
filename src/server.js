@@ -6,7 +6,7 @@
  * 
  * 
  * @lastEdit
- * Oct 01 2022, Kareem Sapi
+ * Oct 05 2022, Kareem Sapi
  */
 
 const express = require('express');
@@ -23,6 +23,8 @@ require('./passport');
 const authRouter = require(`./api/routes/auth`);
 const userRouter = require('./api/routes/user');
 const roleRouter = require('./api/routes/role');
+const patientRouter = require('./api/routes/patient');
+const doctorRouter = require('./api/routes/doctor');
 
 const app = express();
 
@@ -44,14 +46,16 @@ app.use(compression())
 app.use(express.json())
 //seedService
 
-const app_name = "Msomiflix" || config.get('app_name.name');
+const app_name = "" || config.get('app_name.name');
 const { port, root } = config.get('api');
-const PORT = 3000 || port
+const PORT = 8080 || port
 const auth = passport.authenticate('jwt', {session: false})
 
 app.use(`${root}/auth`, authRouter);
 app.use(`${root}/user`, userRouter);
 app.use(`${root}/role`, auth, roleRouter);
+app.use(`${root}/patient`, patientRouter);
+app.use(`${root}/doctor`, auth, doctorRouter);
 
 //Test DB is working.
 sequelize.authenticate()

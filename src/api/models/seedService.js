@@ -1,12 +1,12 @@
 /**
  * @title
- * model index file: 
+ * seed service: 
  * 
  * 
  * 
  * 
  * @lastEdit
- * Oct 01 2022, Kareem Sapi
+ * Oct 05 2022, Kareem Sapi
  */
 
 const sequelize = require('../../db/postgreClient');
