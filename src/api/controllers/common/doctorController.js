@@ -27,7 +27,9 @@ exports.add_doctor = async (req, res) => {
         return res.status(400).jsonp(errors.array());
     }
 
-    const { userId, first_name, middle_name, last_name, date_of_birth, gender, registration_number, qualification, specialization } = req.body
+    const userId = req.user.id
+
+    const { first_name, middle_name, last_name, date_of_birth, gender, registration_number, qualification, specialization } = req.body
 
     try {
         const USER = await Users.findOne({where: {id: userId}})
@@ -48,7 +50,7 @@ exports.add_doctor = async (req, res) => {
             UserId: userId
         })
 
-        return res.status(201).json({message: 'Patient successfully registered'});
+        return res.status(201).json({message: 'Doctor successfully registered'});
 
     } catch (error) {
         logger.error(error);

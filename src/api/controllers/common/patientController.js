@@ -28,6 +28,7 @@ const { saltHashPassword } = require('../../../utils/cipher');
     }
 
     const { first_name, middle_name, last_name, email, phone_number, date_of_birth, gender, blood_group, medical_conditions, password, confirm_password } = req.body
+    console.log(req.body)
 
     try {
         const Result = await User.findOne({where: {username: `${email}`}})
