@@ -24,6 +24,12 @@ const routes: Routes = [{
         .then(module => module.DoctorModule)
     },
 
+    {
+      path: 'patient',
+      loadChildren: () => import('./patient/patient.module')
+        .then(module => module.PatientModule)
+    },
+
     { path: '', redirectTo: 'home', pathMatch: 'full' }
   ]
 }];

@@ -1,23 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 import {
   NbThemeModule, 
-  NbLayoutModule, 
+  NbLayoutModule,
+  NbSearchModule, 
   NbContextMenuModule, 
   NbActionsModule, 
   NbMenuModule,
   NbSidebarModule,
+  NbButtonModule,
+  NbSelectModule,
+  NbIconModule,
 } from '@nebular/theme';
 
 import { 
   HeaderComponent,
-  FooterComponent
+  FooterComponent,
+  PatientHeaderComponent
  } from './components';
 
 import { 
   LayoutComponent,
-  DoctorLayoutComponent
+  DoctorLayoutComponent,
+  PatientLayoutComponent
  } from './layouts';
 
 
@@ -27,19 +34,26 @@ const NB_MODULES = [
   NbActionsModule,
   NbContextMenuModule,
   NbMenuModule.forRoot(),
-  NbSidebarModule
+  NbSidebarModule,
+  NbSearchModule,
+  NbButtonModule,
+  NbSelectModule,
+  NbIconModule,
+  NbEvaIconsModule
 ];
 
 const COMPONENTS = [
   HeaderComponent,
   FooterComponent,
   LayoutComponent,
-  DoctorLayoutComponent
+  DoctorLayoutComponent,
+  PatientLayoutComponent,
+  PatientHeaderComponent
 ]
 
 
 @NgModule({
-  declarations: [ ...COMPONENTS ],
+  declarations: [ ...COMPONENTS],
   imports: [
     CommonModule,
     ...NB_MODULES

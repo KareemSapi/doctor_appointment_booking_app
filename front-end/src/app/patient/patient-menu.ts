@@ -6,7 +6,7 @@ import { NbMenuItem } from '@nebular/theme';
  import { map } from 'rxjs/operators';
  
  @Injectable()
- export class DoctorMenu {
+ export class PatientMenu {
   //  constructor(private roleProvider: NbRoleProvider) {}
  
    getMenu(): Observable<NbMenuItem[]> {
@@ -14,7 +14,7 @@ import { NbMenuItem } from '@nebular/theme';
        {
          title: 'Dashboard',
          icon: 'home-outline',
-         link: '/doctor/dashboard',
+         link: '/patient/dashboard',
          home: true,
          children: undefined,
        }
@@ -32,13 +32,13 @@ import { NbMenuItem } from '@nebular/theme';
        {
          title: 'Appointments',
          icon: 'list-outline',
-         link: '/doctor/appointments/',
+         link: '/patient/appointments/',
        },
 
        {
         title: 'Profile',
         icon: 'person-outline',
-        link: '/doctor/profile',
+        link: '/patient/profile',
         // children: [
         //   {
         //     title: 'my-profile',

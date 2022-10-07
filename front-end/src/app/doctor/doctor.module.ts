@@ -5,6 +5,9 @@ import { ThemeModule } from '../theme/theme.module';
 import { DoctorRoutingModule, routedComponents } from './doctor-routing.module';
 import { DoctorMenu } from './doctor-menu';
 
+import { NbAuthModule } from '@nebular/auth';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
+
 import {
   NbThemeModule, 
   NbLayoutModule, 
@@ -12,6 +15,9 @@ import {
   NbActionsModule, 
   NbMenuModule,
   NbSidebarModule,
+  NbButtonModule,
+  NbSelectModule,
+  NbIconModule,
 } from '@nebular/theme';
 
 const NB_MODULES = [
@@ -20,7 +26,12 @@ const NB_MODULES = [
   NbActionsModule,
   NbContextMenuModule,
   NbMenuModule.forRoot(),
-  NbSidebarModule
+  NbSidebarModule.forRoot(),
+  NbAuthModule.forRoot(),
+  NbButtonModule,
+  NbSelectModule,
+  NbIconModule,
+  NbEvaIconsModule
 ];
 
 
@@ -33,9 +44,9 @@ const NB_MODULES = [
     ThemeModule,
     ...NB_MODULES
   ],
-  exports: [
-    ...routedComponents
-   ],
+  // exports: [
+  //   ...routedComponents
+  //  ],
    providers: [
     DoctorMenu
    ]
