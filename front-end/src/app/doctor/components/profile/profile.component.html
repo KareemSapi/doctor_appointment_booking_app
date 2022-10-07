@@ -1,1 +1,172 @@
-<p>profile works!</p>
+
+
+<form
+[formGroup]="profileForm"
+(submit)="update()"
+aria-labelledby="profileForm"
+autocomplete="off" 
+>
+<div class="form-group-group row">
+  <div class="col-sm-12">
+    <input 
+    type="text" 
+    nbInput
+    fullWidth
+    id="firstName"
+    formControlName="firstName"
+    placeholder="First Name"
+    >
+  </div>
+</div>
+
+<div class="form-group-group row">
+  <div class="col-sm-12">
+    <input
+    type="text"
+    nbInput
+    fullWidth
+    id="middleName"
+    placeholder="Middle Name (Optional) "
+    formControlName="middleName"
+  >
+  </div>
+</div>
+
+<div class="form-group-group row">
+  <div class="col-sm-12">
+    <input
+    type="text"
+    nbInput
+    fullWidth
+    id="surName"
+    placeholder="Last Name"
+    formControlName="surName"
+  >
+  </div>
+</div>
+
+
+ <div class="form-group-group row"> 
+  <div class="col-sm-6">   
+    <input
+      type="date"
+      nbInput
+      fullWidth
+      placeholder="Date of Birth"
+      formControlName="date_of_birth"
+  >
+ </div>
+
+  <div class="col-sm-6">
+    <nb-select
+      id="gender"
+      fullWidth
+      placeholder="Select gender"
+      formControlName="gender"
+      >
+    <nb-option value="Male">male</nb-option>
+    <nb-option value="Female">female</nb-option>
+  </nb-select>
+    </div>
+  </div>
+
+<!-- <div class="form-group-group row">
+  <div class="col-sm-6">
+      <input
+      type="text"
+      nbInput
+      fullWidth
+      id="country"
+      placeholder="country"
+      formControlName="country"
+      >
+  </div>
+
+  <div class="col-sm-6">
+    <input
+      type="text"
+      nbInput
+      fullWidth
+      id="city"
+      placeholder="city/region"
+      formControlName="city"
+     >
+  </div>
+</div> -->
+
+<div class="form-group-group row">
+  <div class="col-sm-6">
+    <input
+      type="text"
+      nbInput
+      fullWidth
+      id="Address"
+      placeholder="Address"
+      formControlName="Address"
+     >
+  </div>
+  <div class="col-sm-6">
+      <input
+      type="tel"
+      nbInput
+      fullWidth
+      id="phone"
+      placeholder="Phone Number"
+      formControlName="phone"
+      >
+  </div>
+</div>
+
+<div class="form-group-group row">
+    <div class="col-sm-12">
+    <input
+      type="text"
+      nbInput
+      fullWidth
+      id="registrationNumber"
+      placeholder="registrationNumber"
+      formControlName="registrationNumber"
+     >
+    </div>
+  </div>
+
+<div class="form-group-group row">
+    <div class="col-sm-12">
+    <input
+      type="text"
+      nbInput
+      fullWidth
+      id="qualification"
+      placeholder="qualification"
+      formControlName="qualification"
+     >
+    </div>
+  </div>
+
+
+<div class="form-group-group row">
+  <div class="col-sm-12">
+  <input
+    type="text"
+    nbInput
+    fullWidth
+    id="specialization"
+    placeholder="specialization"
+    formControlName="specialization"
+   >
+  </div>
+</div>
+
+<div class="btn2">
+    <button
+    type="submit"
+     nbButton 
+     status="success"
+     [disabled] = "submitted || profileForm.invalid"
+     [class.btn-pulse]="submitted"
+    >submit</button>
+ </div>
+
+
+ </form>
+

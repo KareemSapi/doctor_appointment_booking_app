@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThemeModule } from '../theme/theme.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { DoctorRoutingModule, routedComponents } from './doctor-routing.module';
 import { DoctorMenu } from './doctor-menu';
@@ -18,6 +19,7 @@ import {
   NbButtonModule,
   NbSelectModule,
   NbIconModule,
+  NbInputModule
 } from '@nebular/theme';
 
 const NB_MODULES = [
@@ -31,7 +33,8 @@ const NB_MODULES = [
   NbButtonModule,
   NbSelectModule,
   NbIconModule,
-  NbEvaIconsModule
+  NbEvaIconsModule,
+  NbInputModule
 ];
 
 
@@ -42,7 +45,9 @@ const NB_MODULES = [
     CommonModule,
     DoctorRoutingModule,
     ThemeModule,
-    ...NB_MODULES
+    ...NB_MODULES,
+    ReactiveFormsModule,
+    FormsModule
   ],
   // exports: [
   //   ...routedComponents
