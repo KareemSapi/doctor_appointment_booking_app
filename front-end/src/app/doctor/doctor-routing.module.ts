@@ -1,7 +1,38 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { DoctorComponent } from './doctor.component';
+import { 
+  DashboardComponent,
+  AppointmentComponent,
+  ProfileComponent
+ } from './components';
+
+const routes: Routes = [{
+  path: '',
+  component: DoctorComponent,
+  children: [
+    {
+      path: 'dashboard',
+      component: DashboardComponent
+    },
+
+    {
+      path: 'appointments',
+      component: AppointmentComponent
+    },
+
+    {
+      path: 'profile',
+      component: ProfileComponent
+    },
+
+    // {
+    //   path: 'dashboard',
+    //   component: DashboardComponent
+    // },
+  ]
+}];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
@@ -9,4 +40,9 @@ const routes: Routes = [];
 })
 export class DoctorRoutingModule { }
 
-export const routedComponents = [];
+export const routedComponents = [
+  DoctorComponent,
+  DashboardComponent,
+  AppointmentComponent,
+  ProfileComponent
+];

@@ -6,7 +6,8 @@ import {
   NbLayoutModule, 
   NbContextMenuModule, 
   NbActionsModule, 
-  NbMenuModule
+  NbMenuModule,
+  NbSidebarModule,
 } from '@nebular/theme';
 
 import { 
@@ -14,7 +15,10 @@ import {
   FooterComponent
  } from './components';
 
-import { LayoutComponent } from './layouts';
+import { 
+  LayoutComponent,
+  DoctorLayoutComponent
+ } from './layouts';
 
 
 const NB_MODULES = [
@@ -22,13 +26,15 @@ const NB_MODULES = [
   NbThemeModule.forRoot({name: 'default'}),
   NbActionsModule,
   NbContextMenuModule,
-  NbMenuModule.forRoot()
+  NbMenuModule.forRoot(),
+  NbSidebarModule
 ];
 
 const COMPONENTS = [
   HeaderComponent,
   FooterComponent,
-  LayoutComponent
+  LayoutComponent,
+  DoctorLayoutComponent
 ]
 
 

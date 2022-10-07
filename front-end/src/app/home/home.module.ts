@@ -3,6 +3,22 @@ import { CommonModule } from '@angular/common';
 import { ThemeModule } from '../theme/theme.module';
 import { HomeRoutingModule, routedComponents } from './home-routing.module';
 
+import {
+  NbThemeModule, 
+  NbLayoutModule, 
+  NbContextMenuModule, 
+  NbActionsModule, 
+  NbMenuModule
+} from '@nebular/theme';
+
+const NB_MODULES = [
+  NbLayoutModule,
+  NbThemeModule.forRoot({name: 'default'}),
+  NbActionsModule,
+  NbContextMenuModule,
+  NbMenuModule.forRoot()
+];
+
 
 @NgModule({
   declarations: [
@@ -11,7 +27,8 @@ import { HomeRoutingModule, routedComponents } from './home-routing.module';
   imports: [
     CommonModule,
     ThemeModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    ...NB_MODULES
   ],
   exports: [
     ...routedComponents

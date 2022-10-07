@@ -18,10 +18,11 @@ const routes: Routes = [{
         .then(module => module.HomeModule)
     },
 
-    // {
-    //   path: 'home',
-    //   component: HomeComponent
-    // },
+    {
+      path: 'doctor',
+      loadChildren: () => import('./doctor/doctor.module')
+        .then(module => module.DoctorModule)
+    },
 
     { path: '', redirectTo: 'home', pathMatch: 'full' }
   ]
