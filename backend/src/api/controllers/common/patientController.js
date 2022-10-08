@@ -27,7 +27,7 @@ const { saltHashPassword } = require('../../../utils/cipher');
         return res.status(400).jsonp(errors.array());
     }
 
-    const { first_name, middle_name, last_name, email, phone_number, date_of_birth, gender, blood_group, medical_conditions, password, confirm_password } = req.body
+    const { first_name, middle_name, last_name, email, phone_number, date_of_birth, gender, address, blood_group, medical_conditions, password, confirm_password } = req.body
     console.log(req.body)
 
     try {
@@ -52,6 +52,7 @@ const { saltHashPassword } = require('../../../utils/cipher');
             phone_number,
             date_of_birth,
             gender,
+            address,
             blood_group,
             medical_conditions,
             UserId: USER.dataValues.id

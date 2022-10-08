@@ -156,3 +156,21 @@ exports.delete_user = async (req, res) => {
     }
 }
 
+/**
+ * @method: Get user by access token
+ */
+ exports.get_user_by_accessToken = async (req,res) => {
+    const id = req.user.id;
+
+    try {
+        const user = await User.findOne({where: {id: id}});
+
+        if(!user){ return res.status(400).json({message: 'Something went wrong!!!'})}
+
+        return res.status(200).json(user);
+    } catch (error) {
+        logger.error(error)
+        return res.status(400).json({message: 'Something went wrong!!!'})
+    }
+}
+

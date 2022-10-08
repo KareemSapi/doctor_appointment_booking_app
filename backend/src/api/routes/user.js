@@ -19,6 +19,9 @@
  //route to get user by id.
  router.get('/:id', auth, userController.get_user_by_id);
 
+  //route to get current user.
+  router.get('/current', auth, userController.get_user_by_accessToken);
+
  //route to verify user's account
  router.post('/email-verification', userController.email_verification)
 

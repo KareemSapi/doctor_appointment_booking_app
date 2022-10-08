@@ -48,6 +48,19 @@
         allowNull: false,
     },
 
+    phone_number: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        validate: {
+            min: 9
+        }
+    },
+
+    address: {
+        type: Sequelize.STRING,
+        allowNull: true,
+    },
+
     registration_number: { 
         type: Sequelize.STRING,
         allowNull: false,

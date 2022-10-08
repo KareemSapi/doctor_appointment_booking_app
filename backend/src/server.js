@@ -22,7 +22,7 @@ require('./passport');
 
 const authRouter = require(`./api/routes/auth`);
 const userRouter = require('./api/routes/user');
-//const roleRouter = require('./api/routes/role');
+const appointmentRouter = require('./api/routes/appointment');
 const patientRouter = require('./api/routes/patient');
 const doctorRouter = require('./api/routes/doctor');
 
@@ -56,6 +56,7 @@ app.use(`${root}/user`, userRouter);
 //app.use(`${root}/role`, auth, roleRouter);
 app.use(`${root}/patient`, patientRouter);
 app.use(`${root}/doctor`, doctorRouter);
+app.use(`${root}/appointment`, auth, appointmentRouter);
 
 //Test DB is working.
 sequelize.authenticate()

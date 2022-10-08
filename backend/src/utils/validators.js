@@ -60,5 +60,11 @@ exports.validate = (method) => {
                 check('confirm_password').trim(),
             ]
         }
+
+        case "add_appointment": {
+            return [
+                check('start_time', 'Start time can\'t be empty').exists().trim(),
+            ]
+        }
     }
 }

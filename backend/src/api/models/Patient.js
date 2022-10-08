@@ -55,6 +55,11 @@
         allowNull: false,
     },
 
+    address: {
+        type: Sequelize.STRING,
+        allowNull: true,
+    },
+
     blood_group: { 
         type: Sequelize.STRING,
         allowNull: true,

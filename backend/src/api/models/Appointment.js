@@ -52,14 +52,14 @@
     
  })
 
- Doctor.hasMany(Appointment, {
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE'
- })
+//  Doctor.hasMany(Appointment, {
+//     onDelete: 'CASCADE',
+//     onUpdate: 'CASCADE'
+//  })
 
- Patient.hasMany(Appointment, {
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE'
- })
+//  Patient.hasMany(Appointment, {
+//     onDelete: 'CASCADE',
+//     onUpdate: 'CASCADE'
+//  })
 
  module.exports = Appointment;

@@ -12,7 +12,7 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../../db/postgreClient');
 const Doctor = require('./Doctor');
-const Session = require('./Session');
+const Appointment = require('./Appointment');
 const Patient = require('./Patient');
 
 const User = sequelize.define('User', {
@@ -83,7 +83,20 @@ User.hasOne(Patient, {
     onUpdate: 'CASCADE'
 })
 
-Session.belongsTo(User, {
+Appointment.belongsTo(User, {
+    foreignKey: 'createdBy',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+});
+
+Appointment.belongsTo(Patient, {
+    foreignKey: 'PatientId',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+});
+
+Appointment.belongsTo(Doctor, {
+    foreignKey: 'DoctorId',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
 });

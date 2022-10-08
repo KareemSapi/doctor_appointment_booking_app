@@ -35,11 +35,12 @@ passport.use(new LocalStrategy((username, password, cb) => {
         return cb(null, {
           id: user.id,
           username: user.username,
-          isVerified: user.is_verified,
-          isApproved: user.is_approved,
-          // isActive: user.is_active,
-          // twoFactorAuth: user.two_factor_allowed,
-          role: user.RoleId
+          is_verified: user.is_verified,
+          is_approved: user.is_approved,
+          is_active: user.is_active,
+          is_doctor: user.is_doctor,
+          is_patient: user.is_patient,
+          is_admin: user.is_admin
         });
       })
       .catch((error) => { return cb(error)});

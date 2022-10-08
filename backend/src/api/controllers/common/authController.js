@@ -11,7 +11,7 @@
 
  const logger = require('../../../utils/logger');
  const Users = require('../../models/Users');
- const Session = require('../../models/Session');
+ //const Session = require('../../models/Session');
  const config = require('config');
  const cipher = require('../../../utils/cipher');
  const passport = require('passport');
@@ -94,24 +94,26 @@
    */
  exports.logout = async (req, res, next) => {
   //invalidate refresh token in storage
-  const { refreshToken } = req.body; console.log(refreshToken)
+  // const { refreshToken } = req.body; console.log(refreshToken)
   
-  if(refreshToken){
-    try {
-      const session = await Session.findOne({where: {token: refreshToken}})
+  // if(refreshToken){
+  //   try {
+  //     const session = await Session.findOne({where: {token: refreshToken}})
   
-      if(!session){ return res.status(401).json({message: 'Something went wrong!!!'})}
+  //     if(!session){ return res.status(401).json({message: 'Something went wrong!!!'})}
   
-      await session.destroy({force: true});
+  //     await session.destroy({force: true});
   
-      return res.sendStatus(204)
+  //     return res.sendStatus(204)
   
-    } catch (error) {
-      logger.error(error);
-    }
-  }else{
-    return res.status(400).json({message: `Something went wrong!!!`});
-  }
+  //   } catch (error) {
+  //     logger.error(error);
+  //   }
+  // }else{
+  //   return res.status(400).json({message: `Something went wrong!!!`});
+  // }
+
+  return res.status(200).json({message: `user logged out`})
 
  }
 
@@ -197,35 +199,35 @@ async function save_refresh_token(token, id){
  /**
   * @method: create new access token through refresh token
   */
- exports.refresh_token = async (req,res) => {
-  const { refreshToken } = req.body
+//  exports.refresh_token = async (req,res) => {
+//   const { refreshToken } = req.body
 
-  if(refreshToken){ 
+//   if(refreshToken){ 
 
-    try {
+//     try {
 
-      jwt.verify(refreshToken, config.get('auth.jwt.secret'), async function(err, decodedToken){
-        if(err){ return res.status(400).json(err)}
+//       jwt.verify(refreshToken, config.get('auth.jwt.secret'), async function(err, decodedToken){
+//         if(err){ return res.status(400).json(err)}
 
-        const USER = await Session.findOne({where: {token: refreshToken}, include: Users})
-        //console.log(USER)
+//         const USER = await Session.findOne({where: {token: refreshToken}, include: Users})
+//         //console.log(USER)
 
-        if(!USER){ return res.status(400).json({message: `Something went wrong`})}
-        console.log(map_user(USER.User.dataValues))
+//         if(!USER){ return res.status(400).json({message: `Something went wrong`})}
+//         console.log(map_user(USER.User.dataValues))
 
-        const accessToken = jwt_service.sign_jwt(map_user(USER.User.dataValues), "10m");
+//         const accessToken = jwt_service.sign_jwt(map_user(USER.User.dataValues), "10m");
 
-        return res.status(200).json({accessToken})
-      })
+//         return res.status(200).json({accessToken})
+//       })
       
-    } catch (error) {
-      return res.status(400).json(error)
-    }
+//     } catch (error) {
+//       return res.status(400).json(error)
+//     }
 
-  }else{
-    return res.sendStatus(403)
-  }
- }
+//   }else{
+//     return res.sendStatus(403)
+//   }
+//  }
 
  /**
   * @method: filter user data when returning user object when refreshing token
