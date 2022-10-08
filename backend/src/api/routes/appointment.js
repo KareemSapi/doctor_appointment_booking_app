@@ -21,9 +21,9 @@
 router.post('/add', validator.validate("add_appointment"), appointmentController.create_appointment);
 
 //router to get patients appointments
-router.get('/patient', appointmentController.get_appointments);
+router.get('/all', appointmentController.get_appointments);
 
 //router to get doctors appointments
-router.get('/doctor', appointmentController.get_appointments_by_doctor_id)
+// router.get('/all', appointmentController.get_appointments_by_doctor_id)
 
 module.exports = router;

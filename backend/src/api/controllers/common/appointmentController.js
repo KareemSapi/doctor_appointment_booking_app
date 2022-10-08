@@ -46,13 +46,24 @@ exports.create_appointment = async (req, res) => {
 }
 
 /**
- * @method: get appointments by patient
+ * @method: get appointments
  */
 exports.get_appointments = async (req, res) => {
     const id = req.user.id
 
+    let APPOINTMENTS
+
     try {
-        const APPOINTMENTS = await Appointment.findAll({where: {createdBy: id}})
+        if(req.user.is_patient){
+
+            APPOINTMENTS = await Appointment.findAll({where: {createdBy: id}})
+
+        }else{
+            const DOCTOR = await Doctor.findOne({where: {UserId: id}})
+
+            APPOINTMENTS = await Appointment.findAll({where: {DoctorId: DOCTOR.dataValues.id}})
+        }
+       
 
         return res.status(200).json(APPOINTMENTS)
 

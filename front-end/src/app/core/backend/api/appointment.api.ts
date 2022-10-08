@@ -19,8 +19,11 @@ export class AppointmentsApi {
       }));
   }
   
-  getAll(items: any):Observable<any>{
-    return this.api.get(`${this.apiController}/all/${items.id}`)
+  getAll():Observable<any>{
+    return this.api.get(`${this.apiController}/all`)
+     .pipe(map(data => {
+      return {...data }
+     }))
   }
 
   get(id: any): Observable<any> {
