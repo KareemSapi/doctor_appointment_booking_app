@@ -78,12 +78,12 @@
 
             const accessToken = jwt_service.sign_jwt(user, "1w") //create access token
          
-            const refreshToken = jwt_service.sign_jwt({id: user.id}, "1y") //create refresh token
+            //const refreshToken = jwt_service.sign_jwt({id: user.id}, "1y") //create refresh token
 
-            save_refresh_token(refreshToken, user.id) //save refresh token
+            //save_refresh_token(refreshToken, user.id) //save refresh token
 
 
-        return res.status(200).json({ user, accessToken, refreshToken, message: `Login succesful` });
+        return res.status(200).json({ user, accessToken, message: `Login succesful` });
     });
 
   })(req,res)

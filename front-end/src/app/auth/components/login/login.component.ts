@@ -87,7 +87,10 @@ export class LoginComponent implements OnInit {
 
     // this.spinnerText = "Checking Credentials...";
     //this.spinner.show();
-    this.user      = this.loginForm.value;
+    this.user      = {
+      username: this.loginForm.value.email,
+      password: this.loginForm.value.password
+    };
     this.errors    = [];
     this.messages  = [];
     this.submitted = true;
@@ -99,7 +102,7 @@ export class LoginComponent implements OnInit {
       
       if (result.isSuccess()) {
         this.messages = result.getMessages();
-        this.initUserService.initCurrentUser().subscribe();
+        //this.initUserService.initCurrentUser().subscribe();
       } else {
         this.errors = result.getErrors();
       }
@@ -107,7 +110,7 @@ export class LoginComponent implements OnInit {
       const redirect = result.getRedirect();
       if (redirect) {
         setTimeout(() => {
-          return this.router.navigateByUrl(redirect);
+          return this.router.navigate(['/home']);
         }, this.redirectDelay);
       }
       this.cd.detectChanges();

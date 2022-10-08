@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { InitUserService } from './services/init-user.service';
 
 import {
   NbThemeModule, 
@@ -58,6 +59,7 @@ const COMPONENTS = [
     CommonModule,
     ...NB_MODULES
   ],
-  exports: [...COMPONENTS]
+  exports: [...COMPONENTS],
+  providers: [InitUserService]
 })
 export class ThemeModule { }

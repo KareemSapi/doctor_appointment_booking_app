@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { PatientRegistrationComponent } from './auth/components';
+import { PatientRegistrationComponent } from './patient-registration/patient-registration.component';
 
 const routes: Routes = [{
   path: '',

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NbAuthService, NbAuthJWTToken } from '@nebular/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  user: any;
+
+  constructor( 
+    private authService: NbAuthService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
-  }
+    this.user = null;
+    this.authService.getToken()
+    //@ts-ignore
+    .subscribe((token: NbAuthJWTToken) => {
+      if(token.isValid()){
+        this.user = token.getPayload();
+        console.log(this.user)
+        
+        return this.user.is_patient? this.router.navigate(['/patient']): this.router.navigate(['/doctor']);
+      }
+  })
+ }
 
 }

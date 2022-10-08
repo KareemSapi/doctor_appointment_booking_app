@@ -3,6 +3,7 @@ import { HttpRequest } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthRoutingModule, routedComponents } from './auth-routing.module';
+import { CoreModule } from '../core/core.module';
 import {
   NbAuthJWTInterceptor,
   NbAuthModule,
@@ -65,6 +66,8 @@ export function filterInterceptorRequest(req: HttpRequest<any>): boolean {
     ...NB_MODULES,
     ReactiveFormsModule,
     FormsModule,
+    CommonModule,
+    CoreModule
   ],
   exports: [
    ...routedComponents,
@@ -85,7 +88,7 @@ export function filterInterceptorRequest(req: HttpRequest<any>): boolean {
 })
 export class AuthModule { 
   //@ts-ignore
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<AuthModule> {
     //@ts-ignore
     return <ModuleWithProviders>{
       ngModule: AuthModule,
