@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
+import { PatientRegistrationComponent } from './auth/components';
 
 const routes: Routes = [{
   path: '',
@@ -28,6 +29,11 @@ const routes: Routes = [{
       path: 'patient',
       loadChildren: () => import('./patient/patient.module')
         .then(module => module.PatientModule)
+    },
+
+    {
+      path: 'patient-registration',
+      component: PatientRegistrationComponent
     },
 
     { path: '', redirectTo: 'home', pathMatch: 'full' }

@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {
   AuthComponent,
   LoginComponent,
-  RegisterComponent
+  RegisterComponent,
 } from './components'
 
 
@@ -22,6 +22,10 @@ const routes: Routes = [{
       path: 'register',
       component: RegisterComponent,
     },
+    // {
+    //   path: 'patient-registration',
+    //   component: PatientRegistrationComponent,
+    // },
   ]
 }];
 
@@ -36,4 +40,5 @@ export const routedComponents = [
   LoginComponent,
   AuthComponent,
   RegisterComponent,
+  // PatientRegistrationComponent
 ];

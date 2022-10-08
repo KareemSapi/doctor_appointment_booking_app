@@ -64,7 +64,6 @@ export class ProfileComponent implements OnInit {
     surName                       : new FormControl(null,{validators:[Validators.required]}),
     date_of_birth                 : new FormControl(null,{validators:[Validators.required]}),
     gender                        : new FormControl(null,{validators:[Validators.required]}),
-    // country                       : new FormControl(null,{validators:[Validators.required]}),
     bloodGroup                          : new FormControl(null,{validators:[Validators.required]}),
     Address                 : new FormControl(null,{validators:[Validators.required]}),
     medicalConditions              : new FormControl(null,{validators:[Validators.required]}),
