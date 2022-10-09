@@ -28,8 +28,9 @@ exports.add_doctor = async (req, res) => {
     }
 
     const userId = req.user.id
+    console.log(req.body)
 
-    const { first_name, middle_name, last_name, date_of_birth, gender, phone_number, address, registration_number, qualification, specialization } = req.body
+    //const { first_name, middle_name, last_name, date_of_birth, gender, phone_number, address, registration_number, qualification, specialization } = req.body
 
     try {
         const USER = await Users.findOne({where: {id: userId}})
@@ -39,16 +40,16 @@ exports.add_doctor = async (req, res) => {
         }
 
         await Doctor.create({
-            first_name, 
-            middle_name, 
-            last_name, 
-            date_of_birth, 
-            gender,
-            phone_number,
-            address, 
-            registration_number, 
-            qualification, 
-            specialization, 
+            first_name: req.body.first_name, 
+            middle_name: req.body.middle_name, 
+            last_name: req.body.last_name, 
+            date_of_birth: req.body.date_of_birth, 
+            gender: req.body.gender,
+            phone_number:req.body.phone_number,
+            address: req.body.address, 
+            registration_number: req.body.registration_number, 
+            qualification: req.body.qualification, 
+            specialization: req.body.specialization, 
             UserId: userId
         })
 

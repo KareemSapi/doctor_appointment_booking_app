@@ -27,34 +27,33 @@ const { saltHashPassword } = require('../../../utils/cipher');
         return res.status(400).jsonp(errors.array());
     }
 
-    const { first_name, middle_name, last_name, email, phone_number, date_of_birth, gender, address, blood_group, medical_conditions, password, confirm_password } = req.body
     console.log(req.body)
 
     try {
-        const Result = await User.findOne({where: {username: `${email}`}})
+        const Result = await User.findOne({where: {username: `${req.body.email}`}})
 
-        if(password !== confirm_password){ return res.status(400).json({message: `passwords do not match`})}
+        if(req.body.password !== req.body.confirm_password){ return res.status(400).json({message: `passwords do not match`})}
   
         if(Result){ return res.status(400).json({message: `User already exists`})}
   
-        const  passwordHash = saltHashPassword(password, email);
+        const  passwordHash = saltHashPassword(req.body.password, req.body.email);
 
         const USER = await User.create({
-            username: email,
+            username: req.body.email,
             password: passwordHash,
             is_patient: true,
         })
 
         await Patient.create({
-            first_name,
-            middle_name,
-            last_name,
-            phone_number,
-            date_of_birth,
-            gender,
-            address,
-            blood_group,
-            medical_conditions,
+            first_name: req.body.first_name,
+            middle_name: req.body.middle_name,
+            last_name: req.body.last_name,
+            phone_number: req.body.phone_number,
+            date_of_birth: req.body.date_of_birth,
+            gender: req.body.gender,
+            address: req.body.address,
+            blood_group: req.body.blood_group,
+            medical_conditions: req.body.medical_conditions,
             UserId: USER.dataValues.id
         })
 

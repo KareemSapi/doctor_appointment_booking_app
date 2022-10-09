@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { PatientsService } from 'src/app/core/backend/services/patients.service';
 
 @Component({
   selector: 'app-patient-registration',
@@ -17,10 +18,13 @@ export class PatientRegistrationComponent implements OnInit {
   loading!: boolean;
   spinnerMsg         : string = "Processing...";
   data               : any;
-  files              : any;
   profile            : any;
+  disable: boolean = false
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private patientService: PatientsService
+    ) { }
 
      //Form getters
      get firstName() { return this.registrationForm.get('firstName'); }
@@ -45,8 +49,8 @@ export class PatientRegistrationComponent implements OnInit {
       date_of_birth                 : new FormControl(null,{validators:[Validators.required]}),
       gender                        : new FormControl(null,{validators:[Validators.required]}),
       bloodGroup                          : new FormControl(null,{validators:[Validators.required]}),
-      Address                 : new FormControl(null,{validators:[Validators.required]}),
-      medicalConditions              : new FormControl(null,{validators:[Validators.required]}),
+      Address                 : new FormControl(null),
+      medicalConditions              : new FormControl(null),
       phone                         : new FormControl(null,{validators:[Validators.minLength(9)]}),
       password                         : new FormControl(null,{validators:[Validators.minLength(8)]}),
       confirmPassword                         : new FormControl(null,{validators:[Validators.minLength(8)]}),
@@ -54,6 +58,44 @@ export class PatientRegistrationComponent implements OnInit {
    });
   }
 
-  save(): void {} 
+  compare(): void{
+    if(this.registrationForm.value.password !== this.registrationForm.value.confirmPassword){
+      this.disable = true
+    }else{
+      this.disable = false
+    }
+  }
+
+  save(): void {
+
+    const data = JSON.stringify({
+      first_name: this.registrationForm.value.firstName,
+      middle_name: this.registrationForm.value.middleName,
+      sur_name: this.registrationForm.value.surName,
+      email: this.registrationForm.value.email,
+      phone_number: this.registrationForm.value.phone,
+      date_of_birth: this.registrationForm.value.date_of_birth,
+      gender: this.registrationForm.value.gender,
+      address: this.registrationForm.value.Address,
+      blood_group: this.registrationForm.value.bloodGroup,
+      medical_conditions: this.registrationForm.value.medicalConditions,
+      password: this.registrationForm.value.password,
+      confirm_password: this.registrationForm.value.confirmPassword,
+    })
+
+    this.patientService.add(data)
+     .subscribe(res => {
+      if(!res){
+        setTimeout(() => {
+         this.loading = false 
+        }, 3000);
+        return;
+      }else{
+        this.registrationForm.reset();
+        this.router.navigate(['/auth/login'])
+      }
+     })
+  }
+   
 
 }

@@ -14,12 +14,16 @@ export class PatientsService {
     private api: PatientsApi
   ) { }
 
-  getAll(data: any): Observable<Patient> {
+  getAll(data: any): Observable<any> {
     return this.api.getAll(data)
   }
 
 
-  get(id: any): Observable<Patient> {
+  get(id: any): Observable<any> {
     return this.api.get(id);
+  }
+
+  add(data: any): Observable<any> {
+    return this.api.add(data)
   }
 }

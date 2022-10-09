@@ -28,6 +28,7 @@ import { RoleProvider } from './role.provider';
 import { NbRoleProvider, NbSecurityModule } from '@nebular/security';
 import { authOptions } from './auth.settings';
 import { authSettings } from './access.settings';
+import { LogoutComponent } from './components/logout/logout.component';
 
 const GUARDS = [
   AuthGuard, 
@@ -58,7 +59,8 @@ export function filterInterceptorRequest(req: HttpRequest<any>): boolean {
 @NgModule({
   declarations: [
    ...routedComponents,
-   ...PIPES
+   ...PIPES,
+   LogoutComponent
   ],
   imports: [
     CommonModule,

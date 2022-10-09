@@ -1,3 +1,15 @@
 
 
-<p>It works</p>
+
+<nb-card>
+    <nb-card-header>
+        My Appointments
+    </nb-card-header>
+    <nb-card-body>
+        <nb-list>
+            <nb-list-item *ngFor="let appointment of appointments" class="container-fluid">
+                {{appointment}}
+              </nb-list-item>
+        </nb-list>
+    </nb-card-body>
+</nb-card>

@@ -24,7 +24,7 @@ router.post('/sign-up', validator.validate("register_user"), authController.regi
 router.post('/login', authController.login);
 
 //route for logging out
-router.post('/logout', auth, authController.logout);
+router.post('/sign-out', authController.logout);
 
 //route for refresh token
 // router.post('/refresh', authController.refresh_token)

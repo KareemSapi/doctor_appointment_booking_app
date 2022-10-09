@@ -8,7 +8,7 @@ import { CoreModule } from './core/core.module';
 import { AuthModule } from './auth/auth.module';
 
 import { AppComponent } from './app.component';
-import { PatientRegistrationComponent } from './patient-registration/patient-registration.component';
+//import { PatientRegistrationComponent } from './patient-registration/patient-registration.component';
 
 import { NbAuthModule } from '@nebular/auth';
 
@@ -44,7 +44,7 @@ const NB_MODULES = [
 @NgModule({
   declarations: [
     AppComponent,
-    PatientRegistrationComponent
+    //PatientRegistrationComponent
   ],
   imports: [
     BrowserModule,

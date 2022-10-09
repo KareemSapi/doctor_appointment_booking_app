@@ -59,6 +59,7 @@ exports.create_appointment = async (req, res) => {
  */
 exports.get_appointments = async (req, res) => {
     const id = req.user.id
+    //console.log(id, req.user)
 
     let APPOINTMENTS
 
@@ -66,11 +67,14 @@ exports.get_appointments = async (req, res) => {
         if(req.user.is_patient){
 
             APPOINTMENTS = await Appointment.findAll({where: {createdBy: id}})
+            console.log(APPOINTMENTS)
 
         }else{
             const DOCTOR = await Doctor.findOne({where: {UserId: id}})
+            console.log(DOCTOR.dataValues.id)
 
             APPOINTMENTS = await Appointment.findAll({where: {DoctorId: DOCTOR.dataValues.id}})
+            console.log(APPOINTMENTS)
         }
        
 
@@ -106,3 +110,18 @@ exports.get_appointments = async (req, res) => {
 /**
  * @method: confirm appointments
  */
+exports.confirm_appointment = async (req, res) => {
+    const appointmentId = req.body.id
+
+    try {
+       const APPOINTMENT = await Appointment.findOne({where: {id: appointmentId}})
+
+       APPOINTMENT.update({is_active: false})
+
+       return res.sendStatus(200)
+
+    } catch (error) {
+         logger.error(error)
+        return res.status(400).json({message: 'Something went wrong!!!'})
+    }
+}

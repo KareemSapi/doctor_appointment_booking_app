@@ -1,21 +1,50 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import {
+  NB_AUTH_OPTIONS,
+  NbAuthSocialLink,
+  NbAuthService,
+  NbAuthResult,
+} from '@nebular/auth';
+import { getDeepFromObject } from '../../helpers';
+import { NbThemeService } from '@nebular/theme';
+
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterComponent implements OnInit {
+
+  minLength           : number = this.getConfigValue('forms.validation.password.minLength');
+  maxLength           : number = this.getConfigValue('forms.validation.password.maxLength');
+  isOrgNameRequired   : boolean = this.getConfigValue('forms.validation.orgName.required');
+  isGivenNameRequired : boolean = this.getConfigValue('forms.validation.givenName.required');
+  isFamilyNameRequired: boolean = this.getConfigValue('forms.validation.familyName.required');
+  isEmailRequired     : boolean = this.getConfigValue('forms.validation.email.required');
+  isPasswordRequired  : boolean = this.getConfigValue('forms.validation.password.required');
+  redirectDelay       : number = this.getConfigValue('forms.register.redirectDelay');
+  showMessages        : any = this.getConfigValue('forms.register.showMessages');
+  strategy            : string = this.getConfigValue('forms.register.strategy');
+  socialLinks         : NbAuthSocialLink[] = this.getConfigValue('forms.login.socialLinks');
 
   submitted          = false;
   errors             : string[] = [];
   messages           : string[] = [];  
   registrationForm!: FormGroup;
   loading!: boolean;
-  data               : any;
+  user               : any = {};
+  disable: boolean = false
   
-  constructor() { }
+  constructor(
+    protected service                          : NbAuthService,
+    @Inject(NB_AUTH_OPTIONS) protected options = {},
+    protected cd                               : ChangeDetectorRef,
+    protected router                           : Router,
+  ) { }
 
   get email() { return this.registrationForm.get('email'); }
   get password() { return this.registrationForm.get('password'); }
@@ -30,15 +59,63 @@ export class RegisterComponent implements OnInit {
     })
   }
 
+    /*
+    @method : keydown function. 
+  */
+    keyDownFunction(event: any){
+      if(event.keyCode == 13){
+        this.register();
+      }
+    }//end 
+
+    compare(): void{
+      if(this.registrationForm.value.password !== this.registrationForm.value.confirmPassword){
+        this.disable = true
+      }else{
+        this.disable = false
+      }
+    }
+
   register(): void {
 
-    const data = JSON.stringify({
+     this.user = {
       username: this.registrationForm.value.email,
       password: this.registrationForm.value.password,
       confirm_password: this.registrationForm.value.confirmPassword
-    })
+    }
 
-    console.log(data)
+    this.service.register(this.strategy, this.user)
+    .subscribe((result: NbAuthResult) => {
+      
+      this.submitted = false;
+
+      if (result.isSuccess()) {
+        // this.spinner.hide();
+        this.messages = result.getMessages();
+        
+      } else {
+        // this.spinner.hide();
+        this.errors = result.getErrors();
+      }
+
+      this.registrationForm.reset();
+
+      return this.router.navigate(['/auth/login']);
+
+      // const redirect = result.getRedirect();
+      // if (redirect) {
+      //   setTimeout(() => {
+          
+      //   }, this.redirectDelay);
+      // }
+      this.cd.detectChanges();
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  getConfigValue(key: string): any {
+    return getDeepFromObject(this.options, key, null);
   }
 
 }

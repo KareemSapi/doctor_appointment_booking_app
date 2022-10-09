@@ -5,6 +5,8 @@ import {
   AuthComponent,
   LoginComponent,
   RegisterComponent,
+  PatientRegistrationComponent,
+  LogoutComponent
 } from './components'
 
 
@@ -22,10 +24,14 @@ const routes: Routes = [{
       path: 'register',
       component: RegisterComponent,
     },
-    // {
-    //   path: 'patient-registration',
-    //   component: PatientRegistrationComponent,
-    // },
+    {
+      path: 'logout',
+      component: LogoutComponent,
+    },
+    {
+      path: 'patient-registration',
+      component: PatientRegistrationComponent,
+    },
   ]
 }];
 
@@ -40,5 +46,5 @@ export const routedComponents = [
   LoginComponent,
   AuthComponent,
   RegisterComponent,
-  // PatientRegistrationComponent
+  PatientRegistrationComponent
 ];

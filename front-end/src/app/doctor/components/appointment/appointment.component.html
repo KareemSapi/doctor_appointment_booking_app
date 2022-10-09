@@ -1,1 +1,18 @@
-<p>appointment works!</p>
+
+<nb-card>
+    <nb-card-header>
+        My Appointments
+    </nb-card-header>
+    <nb-card-body>
+        <nb-list>
+            <nb-list-item *ngFor="let appointment of appointments">
+                <div class="row container-fluid">
+                    {{ appointment }}
+                </div>
+                <div class="row container-fluid">
+                    <button>Cancel</button>
+                </div>
+              </nb-list-item>
+        </nb-list>
+    </nb-card-body>
+</nb-card>

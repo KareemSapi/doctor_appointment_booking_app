@@ -15,4 +15,8 @@ export class DoctorsService {
   searchDoctors(term: string): Observable<Doctor[]>{
     return this.api.searchDoctors(term)
   }
+
+  add(data: any): Observable<any> {
+    return this.api.add(data)
+  }
 }

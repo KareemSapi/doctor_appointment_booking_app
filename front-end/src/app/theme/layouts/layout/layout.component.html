@@ -2,12 +2,8 @@
   <nb-layout-header fixed>
     <app-header></app-header>
   </nb-layout-header>
-  <!-- <nb-sidebar class="menu-sidebar" tag="menu-sidebar" responsive start>
-    <ng-content select="nb-menu"></ng-content>
-  </nb-sidebar> -->
-  <nb-layout-column>
-    <ng-content select="router-outlet"></ng-content>
-  </nb-layout-column>
+  <nb-layout-column class=" bg-primary">Left column</nb-layout-column>
+  <nb-layout-column class=" bg-success">Right column</nb-layout-column>
   <nb-layout-footer>
     footer
   </nb-layout-footer>

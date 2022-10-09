@@ -15,9 +15,20 @@
     <nb-card-body>
         <ul class="search-result">
             <li *ngFor="let doctor of doctors | async" class="container-fluid">
-              <a routerLink="/detail/{{doctor.id}}">
-                {{doctor.first_name}}
-              </a>
+              <div class="row container-fluid">
+                {{doctor.first_name}} {{doctor.last_name}}
+              </div>
+              <div class="row container-fluid">
+                {{doctor.specialization}}
+              </div>
+              <div class="row container-fluid">
+                <span class="column">
+                  <input type="datetime"/>
+                </span>
+                <span class="column">
+                  <button>Make Appointment</button>
+                </span>
+              </div>
             </li>
           </ul>
     </nb-card-body>

@@ -34,7 +34,7 @@
       const USER = await Users.findOne({where: {username: `${req.body.username}`}})
       
 
-      if(req.body.password !== req.body.confirmPassword){
+      if(req.body.password !== req.body.confirm_password){
         return res.status(400).json({message: `passwords do not match`})
       }
 

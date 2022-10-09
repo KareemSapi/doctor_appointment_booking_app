@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { PatientRegistrationComponent } from './patient-registration/patient-registration.component';
+//import { PatientRegistrationComponent } from './patient-registration/patient-registration.component';
 import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [{
@@ -34,10 +34,10 @@ const routes: Routes = [{
         .then(module => module.PatientModule)
     },
 
-    {
-      path: 'patient-registration',
-      component: PatientRegistrationComponent
-    },
+    // {
+    //   path: 'patient-registration',
+    //   component: PatientRegistrationComponent
+    // },
 
     { path: '', redirectTo: 'home', pathMatch: 'full' }
   ]

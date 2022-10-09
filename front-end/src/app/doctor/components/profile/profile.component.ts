@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DoctorsService } from 'src/app/core/backend/services/doctors.service';
 
 @Component({
   selector: 'app-profile',
@@ -28,6 +29,7 @@ export class ProfileComponent implements OnInit {
  constructor( 
   private router          : Router,
   private route           : ActivatedRoute,
+  private doctorService   : DoctorsService
   //private profileService  : ProfileDataService,
   ){
   const userId : any = this.route.snapshot.paramMap.get('id');
@@ -66,9 +68,9 @@ export class ProfileComponent implements OnInit {
     gender                        : new FormControl(null,{validators:[Validators.required]}),
     registrationNumber                       : new FormControl(null,{validators:[Validators.required]}),
     qualification                          : new FormControl(null,{validators:[Validators.required]}),
-    Address                 : new FormControl(null,{validators:[Validators.required]}),
+    Address                 : new FormControl(null),
     specialization              : new FormControl(null,{validators:[Validators.required]}),
-    phone                         : new FormControl(null,{validators:[Validators.minLength(9)]}),
+    phone                         : new FormControl(null),
     
  });
   }
@@ -93,7 +95,35 @@ export class ProfileComponent implements OnInit {
   //    });
   // }
 
-update(){}
+  save(): void {
+
+    const data = JSON.stringify({
+      first_name: this.profileForm.value.firstName,
+      middle_name: this.profileForm.value.middleName,
+      sur_name: this.profileForm.value.surName,
+      phone_number: this.profileForm.value.phone,
+      date_of_birth: this.profileForm.value.date_of_birth,
+      gender: this.profileForm.value.gender,
+      address: this.profileForm.value.Address,
+      registration_number: this.profileForm.value.registrationNumber,
+      qualification: this.profileForm.value.qualification,
+      specialization: this.profileForm.value.specialization,
+    
+    })
+
+    this.doctorService.add(data)
+     .subscribe(res => {
+      if(!res){
+        setTimeout(() => {
+         this.loading = false 
+        }, 3000);
+        return;
+      }else{
+        this.profileForm.reset();
+        this.router.navigate(['/doctor/appointment'])
+      }
+     })
+  }
 
 
 
