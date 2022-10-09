@@ -14,26 +14,35 @@
  const Appointment = require('../../models/Appointment');
  const Patient = require('../../models/Patient')
  const Doctor = require('../../models/Doctor')
+ const { validationResult } = require('express-validator');
 
 /**
  * @method: create appointment
  */
 exports.create_appointment = async (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(400).jsonp(errors.array());
+    }
+
     const id = req.user.id;
-    const { start_time, doctorId } = req.body;
+    const { time, doctorId } = req.body;
+    console.log(id, time, doctorId)
 
     try {
-        const Patient = await Patient.findOne({where: {UserId: id}, include: User})
+        const PATIENT = await Patient.findOne({where: {UserId: id}, include: User})
+        console.log(Patient);
 
-        const USER = Patient.User.dataValues
+        const USER = PATIENT.User.dataValues
+        console.log(USER)
 
         if(!USER.is_patient){ return res.sendStatus(403) }
 
         await Appointment.create({
-            start_time,
-            end_time: start_time + (60000*30),
+            time,
             DoctorId: doctorId,
-            PatientId: Patient.dataValues.id,
+            PatientId: PATIENT.dataValues.id,
             createdBy: id
         });
 

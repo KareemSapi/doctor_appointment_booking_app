@@ -20,4 +20,7 @@
 //route to create doctor's profile
 router.post('/add',auth, validator.validate("add_doctor"), doctorController.add_doctor);
 
+//route to search for doctors
+router.get('/:term', auth, doctorController.get_doctor_by_specialization)
+
 module.exports = router;

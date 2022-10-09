@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NbTokenService } from '@nebular/auth';
 import { takeWhile } from 'rxjs/operators';
 import { PatientMenu } from './patient-menu';
@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
   templateUrl: './patient.component.html',
   styleUrls: ['./patient.component.scss']
 })
-export class PatientComponent implements OnDestroy {
+export class PatientComponent implements OnDestroy, OnInit {
 
   menu!: NbMenuItem[];
   alive: boolean = true;
@@ -26,6 +26,10 @@ export class PatientComponent implements OnDestroy {
         .subscribe(() => {
           this.initMenu();
         });
+    }
+
+    ngOnInit(): void {
+        
     }
 
     initMenu(){

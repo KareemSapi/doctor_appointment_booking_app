@@ -23,16 +23,11 @@
         primaryKey: true,
     },
 
-    start_time: {
+    time: {
         type: Sequelize.DATE,
         allowNull: false,
     },
     
-    
-    end_time: {
-        type: Sequelize.DATE,
-        allowNull: false,
-    },
 
     is_active: { 
         type: Sequelize.BOOLEAN,

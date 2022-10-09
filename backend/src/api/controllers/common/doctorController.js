@@ -59,3 +59,22 @@ exports.add_doctor = async (req, res) => {
         return res.status(400).json({message: 'Something went wrong!!!'})
     }
  }
+
+ /**
+  * @method: search for doctors based on their specialization
+  */
+ exports.get_doctor_by_specialization = async (req, res) => {
+    const term = req.params.term;
+
+    try {
+        const DOCTORS = await Doctor.findAll({where: {specialization: term}})
+        
+        if(!DOCTORS){ return res.status(200).json([])}
+
+        return res.status(200).json(DOCTORS)
+
+    } catch (error) {
+         logger.error(error);
+        return res.status(400).json({message: 'Something went wrong!!!'})
+    }
+ } 

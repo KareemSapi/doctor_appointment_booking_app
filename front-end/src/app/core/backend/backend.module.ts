@@ -8,6 +8,7 @@ import { UsersService } from './services/users.service';
 import { PatientsService } from './services/patients.service';
 import { DoctorsService } from './services/doctors.service';
 import { AppointmentsService } from './services/appointments.service';
+import { SearchService } from './services/search.service';
 
 import { NbAuthModule } from '@nebular/auth';
 
@@ -22,7 +23,8 @@ const SERVICES = [
   UsersService,
   PatientsService,
   DoctorsService,
-  AppointmentsService
+  AppointmentsService,
+  SearchService
 ]
 
 @NgModule({

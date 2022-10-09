@@ -63,7 +63,7 @@ exports.validate = (method) => {
 
         case "add_appointment": {
             return [
-                check('start_time', 'Start time can\'t be empty').exists().trim(),
+                check('start_time', 'Start time can\'t be empty').exists().isDate({format: 'YYYY-MM-DD'}).trim(),
             ]
         }
     }

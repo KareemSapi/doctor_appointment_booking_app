@@ -19,7 +19,8 @@ import {
   NbButtonModule,
   NbSelectModule,
   NbIconModule,
-  NbInputModule
+  NbInputModule,
+  NbCardModule
 } from '@nebular/theme';
 
 const NB_MODULES = [
@@ -34,7 +35,8 @@ const NB_MODULES = [
   NbSelectModule,
   NbIconModule,
   NbEvaIconsModule,
-  NbInputModule
+  NbInputModule,
+  NbCardModule
 ];
 
 

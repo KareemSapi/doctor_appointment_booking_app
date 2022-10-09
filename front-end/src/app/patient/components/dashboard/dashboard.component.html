@@ -1,1 +1,25 @@
-<p>dashboard works!</p>
+
+<nb-card>
+    <nb-card-header>
+        <input
+         nbInput
+         fullWidth
+         class="center"
+         type="search"
+         #searchBox 
+         id="search-box" 
+         (input)="search(searchBox.value)"
+         placeholder="Search by specialization.... eg.cardiologist"
+        />
+    </nb-card-header>
+    <nb-card-body>
+        <ul class="search-result">
+            <li *ngFor="let doctor of doctors | async" class="container-fluid">
+              <a routerLink="/detail/{{doctor.id}}">
+                {{doctor.first_name}}
+              </a>
+            </li>
+          </ul>
+    </nb-card-body>
+</nb-card>
+
