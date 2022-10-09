@@ -2,9 +2,30 @@
   <nb-layout-header fixed>
     <app-header></app-header>
   </nb-layout-header>
-  <nb-layout-column class=" bg-primary">Left column</nb-layout-column>
-  <nb-layout-column class=" bg-success">Right column</nb-layout-column>
+  <nb-layout-column class=" bg-primary">
+    <div class="row justify-content-center">
+      <div class="row justify-content-center">
+        <h4 class="text-center">Are you a doctor and would like to work with us?</h4>
+      </div>
+      <div class="row justify-content-center col-md-4">
+        <button nbButton type="submit" (click)="doctor()">Partner with us.</button>
+      </div>
+    </div>
+  </nb-layout-column>
+  <nb-layout-column class=" bg-success">
+    <div class="row justify-content-center">
+      <div class="row justify-content-center">
+        <div class="row justify-content-center">
+          <h4 class="text-center">Are you tired of physically going to the clinic to book an appointment with a specialist?
+            Well our platform might be just for you. Register with us today so you can start making appointments virtually on your phone.
+          </h4>
+        </div>
+        <div class="row justify-content-center col-md-4">
+          <button nbButton type="submit" (click)="patient()">Register</button>
+        </div>
+      </div>
+    </div>
+  </nb-layout-column>
   <nb-layout-footer>
-    footer
   </nb-layout-footer>
 </nb-layout>
