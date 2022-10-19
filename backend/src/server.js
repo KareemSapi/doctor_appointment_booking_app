@@ -16,7 +16,7 @@ const config = require('config');
 const sequelize = require('./db/postgreClient');
 const cors = require('cors');
 const passport = require('passport');
-//const seedService = require('./api/models/seedService')
+// const seedService = require('./api/models/seedService')
 
 require('./passport');
 
@@ -44,7 +44,7 @@ function clientErrorHandler(err, req, res, next) {
 app.use(cors())
 app.use(compression())
 app.use(express.json())
-//seedService
+// seedService
 
 const app_name = "Doctor Appointment App" || config.get('app_details.name');
 const { port, root } = config.get('api');

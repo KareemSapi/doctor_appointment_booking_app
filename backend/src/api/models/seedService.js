@@ -16,6 +16,7 @@ const logger = require('../../utils/logger');
 module.exports = sequelize
   .sync({force: true})
   .then((response) => {
-    logger.info(response);
+    //logger.info(response);
+    console.log(response)
   })
   .catch(error => logger.error(`${error}`));

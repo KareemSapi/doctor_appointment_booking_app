@@ -39,6 +39,11 @@ exports.add_doctor = async (req, res) => {
             return res.sendStatus(403);
         }
 
+        //Check if respective doctor already has a profile
+        const DOCTOR = await Doctor.findOne({where: {UserId: userId}})
+
+        if(DOCTOR){ return res.status(400).json({message: `Doctor already exists`}) }
+
         await Doctor.create({
             first_name: req.body.first_name, 
             middle_name: req.body.middle_name, 
@@ -69,6 +74,7 @@ exports.add_doctor = async (req, res) => {
 
     try {
         const DOCTORS = await Doctor.findAll({where: {specialization: term}})
+        console.log(DOCTORS)
         
         if(!DOCTORS){ return res.status(200).json([])}
 

@@ -11,8 +11,8 @@
 
  const Sequelize = require('sequelize');
  const sequelize = require('../../db/postgreClient');
- const Doctor = require('./Doctor');
- const Patient = require('./Patient');
+ const Patient = require('./Patient')
+ const Doctor = require('./Doctor')
 
  const Appointment = sequelize.define('Appointment', {
 
@@ -47,14 +47,16 @@
     
  })
 
-//  Doctor.hasMany(Appointment, {
-//     onDelete: 'CASCADE',
-//     onUpdate: 'CASCADE'
-//  })
+ Patient.hasMany(Appointment, {
+    foreignKey: 'PatientId',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+});
 
-//  Patient.hasMany(Appointment, {
-//     onDelete: 'CASCADE',
-//     onUpdate: 'CASCADE'
-//  })
+Doctor.hasMany(Appointment, {
+    foreignKey: 'DoctorId',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+});
 
  module.exports = Appointment;

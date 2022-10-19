@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
         this.user = token.getPayload();
         console.log(this.user)
         
-        return this.user.is_patient? this.router.navigate(['/patient']): this.router.navigate(['/doctor']);
+        this.user.is_patient? this.router.navigate(['/patient']): this.router.navigate(['/doctor']);
       }
   })
  }

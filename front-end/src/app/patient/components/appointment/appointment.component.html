@@ -8,7 +8,7 @@
     <nb-card-body>
         <nb-list>
             <nb-list-item *ngFor="let appointment of appointments" class="container-fluid">
-                {{appointment}}
+                {{appointment[0].time}}
               </nb-list-item>
         </nb-list>
     </nb-card-body>

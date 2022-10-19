@@ -33,10 +33,6 @@ const User = sequelize.define('User', {
     password: { 
         type: Sequelize.STRING,
         allowNull: false,
-        validate: {
-            min: 8,
-        },
-        
     },
 
     is_verified: { type: Sequelize.BOOLEAN, defaultValue: true},
@@ -83,22 +79,22 @@ User.hasOne(Patient, {
     onUpdate: 'CASCADE'
 })
 
-Appointment.belongsTo(User, {
+User.hasMany(Appointment, {
     foreignKey: 'createdBy',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
 });
 
-Appointment.belongsTo(Patient, {
-    foreignKey: 'PatientId',
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE'
-});
+// Patient.hasMany(Appointment, {
+//     foreignKey: 'PatientId',
+//     onDelete: 'CASCADE',
+//     onUpdate: 'CASCADE'
+// });
 
-Appointment.belongsTo(Doctor, {
-    foreignKey: 'DoctorId',
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE'
-});
+// Doctor.hasMany(Appointment, {
+//     foreignKey: 'DoctorId',
+//     onDelete: 'CASCADE',
+//     onUpdate: 'CASCADE'
+// });
 
 module.exports = User;

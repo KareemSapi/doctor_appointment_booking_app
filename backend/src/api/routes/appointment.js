@@ -20,7 +20,7 @@
 //route to register patient
 router.post('/add', validator.validate("add_appointment"), appointmentController.create_appointment);
 
-//router to get patients appointments
+//router to get all appointments
 router.get('/all', appointmentController.get_appointments);
 
 router.put('/confirm', appointmentController.confirm_appointment);

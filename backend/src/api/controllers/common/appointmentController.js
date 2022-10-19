@@ -31,13 +31,10 @@ exports.create_appointment = async (req, res) => {
     console.log(id, time, doctorId)
 
     try {
-        const PATIENT = await Patient.findOne({where: {UserId: id}, include: User})
-        console.log(Patient);
+        const PATIENT = await Patient.findOne({where: {UserId: id}})
+        console.log(PATIENT);
 
-        const USER = PATIENT.User.dataValues
-        console.log(USER)
-
-        if(!USER.is_patient){ return res.sendStatus(403) }
+        if(!req.user.is_patient){ return res.sendStatus(403) }
 
         await Appointment.create({
             time,
