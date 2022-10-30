@@ -27,18 +27,18 @@ exports.create_appointment = async (req, res) => {
     }
 
     const id = req.user.id;
-    const { time, doctorId } = req.body;
-    console.log(id, time, doctorId)
+
+    //console.log(id, req.body)
 
     try {
         const PATIENT = await Patient.findOne({where: {UserId: id}})
-        console.log(PATIENT);
+        //console.log(PATIENT);
 
         if(!req.user.is_patient){ return res.sendStatus(403) }
 
         await Appointment.create({
-            time,
-            DoctorId: doctorId,
+            time: req.body.time,
+            DoctorId: req.body.doctorId,
             PatientId: PATIENT.dataValues.id,
             createdBy: id
         });
@@ -64,14 +64,14 @@ exports.get_appointments = async (req, res) => {
         if(req.user.is_patient){
 
             APPOINTMENTS = await Appointment.findAll({where: {createdBy: id}})
-            console.log(APPOINTMENTS)
+            //console.log(APPOINTMENTS)
 
         }else{
             const DOCTOR = await Doctor.findOne({where: {UserId: id}})
-            console.log(DOCTOR.dataValues.id)
+            //console.log(DOCTOR.dataValues.id)
 
             APPOINTMENTS = await Appointment.findAll({where: {DoctorId: DOCTOR.dataValues.id}})
-            console.log(APPOINTMENTS)
+            //console.log(APPOINTMENTS)
         }
        
 

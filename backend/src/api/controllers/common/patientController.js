@@ -20,14 +20,12 @@ const { saltHashPassword } = require('../../../utils/cipher');
 /**
  * @method: register patient
  */
- exports.add_patient = async (req, res) => {
+ exports.add_patient = async (req, res) => { 
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
         return res.status(400).jsonp(errors.array());
     }
-
-    console.log(req.body)
 
     try {
         const Result = await User.findOne({where: {username: `${req.body.email}`}})

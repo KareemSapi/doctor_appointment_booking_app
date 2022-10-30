@@ -13,24 +13,48 @@
         />
     </nb-card-header>
     <nb-card-body>
-        <ul class="search-result">
-            <li *ngFor="let doctor of doctors | async" class="container-fluid">
-              <div class="row container-fluid">
-                {{doctor.first_name}} {{doctor.last_name}}
+        
+         <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1 container-fluid">
+            <div *ngFor="let doctor of doctors | async" class="container-fluid row justify-content-center">
+              <div class="row appointment">
+                <p><b>Name:</b> {{doctor.first_name}} {{doctor.last_name}}</p>
               </div>
-              <div class="row container-fluid">
-                {{doctor.specialization}}
+              <div class="row appointment">
+                <p><b>Specialization:</b> {{doctor.specialization}}</p>
               </div>
-              <div class="row container-fluid">
-                <span class="column">
-                  <input type="datetime"/>
-                </span>
-                <span class="column">
-                  <button>Make Appointment</button>
-                </span>
+
+              <form
+              [formGroup]="appointmentForm"
+              (submit)="save()" 
+              aria-labelledby="title"
+              autocomplete="off"
+              >
+                <div class="row">
+                  <input 
+                   type="text" 
+                   id="doctorId"
+                   formControlName="doctorId"
+                   [value]=doctor.id
+                  />
               </div>
-            </li>
-          </ul>
+              <div class="row appointment">
+                  <input 
+                   type="datetime-local" 
+                   id="time"
+                   formControlName="time"
+                   placeholder="Pick appointment date"/>
+              </div>
+              <div class="row justify-content-center appointment">
+                <button
+                class="btn btn-primary btn-sm"
+                style="padding-left: 2.5rem; padding-right: 2.5rem;"
+                type="submit"
+               >Make Appointment</button>
+              </div>
+            </form>
+            </div>
+         </div>
+          
     </nb-card-body>
 </nb-card>
 

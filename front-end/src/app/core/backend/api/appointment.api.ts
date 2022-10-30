@@ -22,7 +22,7 @@ export class AppointmentsApi {
   getAll():Observable<any>{
     return this.api.get(`${this.apiController}/all`)
      .pipe(map(data => {
-      return {...data }
+      return [...data] 
      }))
   }
 

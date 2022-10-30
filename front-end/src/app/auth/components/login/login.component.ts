@@ -96,23 +96,30 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
 
     this.service.authenticate(this.strategy, this.user)
-    .subscribe((result: NbAuthResult) => {
+    .subscribe((result: NbAuthResult) => { //console.log(result)
       this.submitted = false;
       //this.spinner.hide();
       
       if (result.isSuccess()) {
         this.messages = result.getMessages();
-        //this.initUserService.initCurrentUser().subscribe();
+
+        let token = result.getToken().getPayload()
+        //console.log(token)
+
+        setTimeout(() => {
+          return token.is_patient? this.router.navigate(['/patient']): this.router.navigate(['/doctor']);
+        }, this.redirectDelay);
+        
       } else {
         this.errors = result.getErrors();
       }
       
-      const redirect = result.getRedirect();
-      if (redirect) {
-        setTimeout(() => {
-          return this.router.navigate(['/home']);
-        }, this.redirectDelay);
-      }
+      // const redirect = result.getRedirect();
+      // if (redirect) {
+      //   setTimeout(() => {
+      //     return this.router.navigate(['/home']);
+      //   }, this.redirectDelay);
+      // }
       this.cd.detectChanges();
     });
 

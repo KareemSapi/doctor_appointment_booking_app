@@ -110,7 +110,7 @@ export class RegisterComponent implements OnInit {
       // }
       this.cd.detectChanges();
     }, error => {
-      console.log(error);
+      //console.log(error);
     });
   }
 

@@ -68,10 +68,10 @@ export class PatientRegistrationComponent implements OnInit {
 
   save(): void {
 
-    const data = JSON.stringify({
+    const data = {
       first_name: this.registrationForm.value.firstName,
       middle_name: this.registrationForm.value.middleName,
-      sur_name: this.registrationForm.value.surName,
+      last_name: this.registrationForm.value.surName,
       email: this.registrationForm.value.email,
       phone_number: this.registrationForm.value.phone,
       date_of_birth: this.registrationForm.value.date_of_birth,
@@ -81,7 +81,7 @@ export class PatientRegistrationComponent implements OnInit {
       medical_conditions: this.registrationForm.value.medicalConditions,
       password: this.registrationForm.value.password,
       confirm_password: this.registrationForm.value.confirmPassword,
-    })
+    }
 
     this.patientService.add(data)
      .subscribe(res => {

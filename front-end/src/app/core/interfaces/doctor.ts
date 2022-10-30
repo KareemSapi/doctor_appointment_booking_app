@@ -1,6 +1,6 @@
 
 export interface Doctor {
-    id: Number;
+    id: number;
     first_name: string;
     middle_name: string;
     last_name: string;

@@ -26,8 +26,8 @@ export class AppointmentComponent implements OnInit {
       if(!data){
         this.appointments = []
       }else{
-        this.appointments = [data]
-        console.log(this.appointments)
+        this.appointments = data
+        //console.log(this.appointments)
       }
      })
   }

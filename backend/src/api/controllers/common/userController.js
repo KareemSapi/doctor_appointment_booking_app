@@ -40,7 +40,7 @@ exports.get_user_by_id = async (req,res) => {
  */
 exports.email_verification = (req,res) => {
     const token = req.body.token;
-    console.log(token)
+    //console.log(token)
 
     if(token){ 
 
@@ -51,7 +51,6 @@ exports.email_verification = (req,res) => {
     
                 try {
                     const USER = await User.findOne({where: {id: decodedToken.id, username: decodedToken.username}})
-                    console.log(USER);
         
                     if(!USER){ return res.status(400).json({message: 'token error'}) }
     
@@ -117,7 +116,7 @@ exports.re_send_verification_email = async (req, res) => {
         if(!USER){ return res.status(400).json({message:`Something went wrong!!!`})}
 
         const token = sign_jwt({id: USER.id, username: USER.username}, "30m")
-        console.log(token)
+        //console.log(token)
 
         send_verification_email(USER.username, "", token)
 

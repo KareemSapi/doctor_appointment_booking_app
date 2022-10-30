@@ -20,13 +20,13 @@ const passport = require('passport');
 
 require('./passport');
 
-const authRouter = require(`./api/routes/auth`);
-const userRouter = require('./api/routes/user');
-const appointmentRouter = require('./api/routes/appointment');
-const patientRouter = require('./api/routes/patient');
-const doctorRouter = require('./api/routes/doctor');
-
 const app = express();
+
+app.use(cors())
+app.use(compression())
+app.use(express.json())
+app.use(express.urlencoded({extended: false}))
+// seedService
 
 function logErrors(err, req, res, next) {
     logger.error(err);
@@ -41,19 +41,20 @@ function clientErrorHandler(err, req, res, next) {
     }
 }
 
-app.use(cors())
-app.use(compression())
-app.use(express.json())
-// seedService
+const authRouter = require(`./api/routes/auth`);
+const userRouter = require('./api/routes/user');
+const appointmentRouter = require('./api/routes/appointment');
+const patientRouter = require('./api/routes/patient');
+const doctorRouter = require('./api/routes/doctor');
+
 
 const app_name = "Doctor Appointment App" || config.get('app_details.name');
 const { port, root } = config.get('api');
-const PORT = 8080 || port
+const PORT = 8081 || port
 const auth = passport.authenticate('jwt', {session: false})
 
 app.use(`${root}/auth`, authRouter);
 app.use(`${root}/user`, userRouter);
-//app.use(`${root}/role`, auth, roleRouter);
 app.use(`${root}/patient`, patientRouter);
 app.use(`${root}/doctor`, doctorRouter);
 app.use(`${root}/appointment`, auth, appointmentRouter);

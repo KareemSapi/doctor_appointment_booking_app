@@ -28,7 +28,7 @@ exports.add_doctor = async (req, res) => {
     }
 
     const userId = req.user.id
-    console.log(req.body)
+    //console.log(req.body)
 
     //const { first_name, middle_name, last_name, date_of_birth, gender, phone_number, address, registration_number, qualification, specialization } = req.body
 
@@ -69,12 +69,12 @@ exports.add_doctor = async (req, res) => {
  /**
   * @method: search for doctors based on their specialization
   */
- exports.get_doctor_by_specialization = async (req, res) => {
-    const term = req.params.term;
+ exports.get_doctor_by_specialization = async (req, res) => { //console.log(req.params)
+    const term = req.params.term; 
 
     try {
         const DOCTORS = await Doctor.findAll({where: {specialization: term}})
-        console.log(DOCTORS)
+        //console.log(DOCTORS)
         
         if(!DOCTORS){ return res.status(200).json([])}
 
