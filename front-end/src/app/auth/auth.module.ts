@@ -15,6 +15,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './auth.interceptor';
 //guards
 import { AuthGuard } from './auth.guard';
+import { RoleGuard } from './role.guard';
 
 import {
   NbCardModule,
@@ -31,7 +32,8 @@ import { authSettings } from './access.settings';
 import { LogoutComponent } from './components/logout/logout.component';
 
 const GUARDS = [
-  AuthGuard, 
+  AuthGuard,
+  RoleGuard 
   // ModeratorGuard, 
   // AdminGuard
 ];

@@ -3,6 +3,7 @@ import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 //import { PatientRegistrationComponent } from './patient-registration/patient-registration.component';
 import { AuthGuard } from './auth/auth.guard';
+import { RoleGuard } from './auth/role.guard';
 
 const routes: Routes = [{
   path: '',
@@ -22,14 +23,14 @@ const routes: Routes = [{
 
     {
       path: 'doctor',
-      canActivate: [AuthGuard],
+      canActivate: [AuthGuard, RoleGuard],
       loadChildren: () => import('./doctor/doctor.module')
         .then(module => module.DoctorModule)
     },
 
     {
       path: 'patient',
-      canActivate: [AuthGuard],
+      canActivate: [AuthGuard, RoleGuard],
       loadChildren: () => import('./patient/patient.module')
         .then(module => module.PatientModule)
     },

@@ -23,6 +23,10 @@ export class PatientsService {
     return this.api.get(id);
   }
 
+  getCurrent(): Observable<any> {
+    return this.api.getCurrent();
+  }
+
   add(data: any): Observable<any> {
     return this.api.add(data)
   }

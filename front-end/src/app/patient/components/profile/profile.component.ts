@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { PatientsService } from 'src/app/core/backend/services/patients.service';
 
 @Component({
   selector: 'app-profile',
@@ -22,12 +23,12 @@ export class ProfileComponent implements OnInit {
  loading!: boolean;
  spinnerMsg         : string = "Processing...";
  data               : any;
- files              : any;
  profile            : any;
 
  constructor( 
   private router          : Router,
   private route           : ActivatedRoute,
+  private patientService  : PatientsService
   //private profileService  : ProfileDataService,
   ){
   const userId : any = this.route.snapshot.paramMap.get('id');
@@ -72,25 +73,24 @@ export class ProfileComponent implements OnInit {
  });
   }
 
-  // getProfile(id: any){
-  //   this.profileService.get(id)
-  //    .subscribe(res => {
-  //      this.profile = res;
-  //      console.log(this.profile)
-  //      this.profileForm.setValue({
-  //       firstName                     : this.profile.firstName,
-  //       middleName                    : this.profile.middleName,
-  //       surName                       : this.profile.surName,
-  //       date_of_birth                 : this.profile.date_of_birth,
-  //       gender                        : this.profile.gender,
-  //       country                       : this.profile.country,
-  //       city                          : this.profile.city,
-  //       postalAddress                 : this.profile.postalAddress,
-  //       physicalAddress               : this.profile.physicalAddress,
-  //       phone                         : this.profile.phoneNumber,
-  //      });
-  //    });
-  // }
+  getProfile(id: any){
+    this.patientService.get(id)
+     .subscribe(res => {
+       this.profile = res;
+       console.log(this.profile)
+       this.profileForm.setValue({
+        firstName                     : this.profile.firstName,
+        middleName                    : this.profile.middleName,
+        surName                       : this.profile.surName,
+        date_of_birth                 : this.profile.date_of_birth,
+        gender                        : this.profile.gender,
+        medicalConditions             : this.profile.medical_conditions,
+        bloodGroup                    : this.profile.blood_group,
+        Address                       : this.profile.Address,
+        phone                         : this.profile.phoneNumber,
+       });
+     });
+  }
 
 update(){}
 

@@ -20,4 +20,7 @@
 //route to register patient
 router.post('/add', validator.validate("add_patient"), patientController.add_patient);
 
+//route to get patient by auth token
+router.post('/current', patientController.get_current_patient);
+
 module.exports = router;

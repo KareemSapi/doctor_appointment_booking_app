@@ -63,3 +63,20 @@ const { saltHashPassword } = require('../../../utils/cipher');
         return res.status(400).json({message: 'Something went wrong!!!'})
     }
  }
+
+ exports.get_current_patient = async (req, res) => {
+    try {
+
+        if(req.user.is_patient) return res.sendStatus(403)
+
+        const PATIENT = await Patient.findOne({where: {UserId: req.user.id}})
+
+        if(!PATIENT) return {};
+
+        return PATIENT;
+
+    } catch (error) {
+        logger.error(error);
+        return res.status(400).json({message: 'Something went wrong!!!'})
+    }
+ }
