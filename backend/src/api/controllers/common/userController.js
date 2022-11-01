@@ -158,18 +158,30 @@ exports.delete_user = async (req, res) => {
 /**
  * @method: Get user by access token
  */
- exports.get_user_by_accessToken = async (req,res) => {
+ exports.get_current_user = async (req,res) => { //console.log(req.user)
     const id = req.user.id;
 
     try {
-        const user = await User.findOne({where: {id: id}});
+        const USER = await User.findOne({where: {id: req.user.id}});
+        //console.log(USER)
 
-        if(!user){ return res.status(400).json({message: 'Something went wrong!!!'})}
+        if(!USER){ return res.status(400).json({message: 'Something went wrong!!!'})}
 
-        return res.status(200).json(user);
+        return res.status(200).json(map_user(USER));
     } catch (error) {
         logger.error(error)
         return res.status(400).json({message: 'Something went wrong!!!'})
+    }
+}
+
+function map_user(user){
+    return user = {
+        id: user.id,
+        username: user.username,
+        is_verified: user.is_verified,
+        is_approved: user.is_approved,
+        is_patient: user.is_patient,
+        is_doctor: user.is_doctor,
     }
 }
 

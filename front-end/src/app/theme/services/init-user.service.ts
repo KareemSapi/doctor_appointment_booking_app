@@ -4,22 +4,22 @@ import { tap } from 'rxjs/operators';
 import { UserStore } from '../../core/stores/user.store';
 import { Injectable } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
+import { UsersService } from 'src/app/core/backend/services/users.service';
 
 @Injectable()
 export class InitUserService {
-    usersService!: UserData;
-    
+   
     constructor(
         protected userStore: UserStore,
-        //protected usersService: UserData,
+        protected usersService: UsersService,
         // protected profileServie : ProfileData,
         protected themeService: NbThemeService) { }
 
     initCurrentUser(): Observable<User> {
       return this.usersService.getCurrentUser()
-            .pipe(tap((user: User) => {
-                if (user) {
-                    this.userStore.setUser(user);
+            .pipe(tap((user: User) => { console.log(user)
+                if (user) { 
+                    this.userStore.value = user;
                 }
             }));
     }//end initCurrentUser

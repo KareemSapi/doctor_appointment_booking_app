@@ -42,7 +42,7 @@ exports.add_doctor = async (req, res) => {
         //Check if respective doctor already has a profile
         const DOCTOR = await Doctor.findOne({where: {UserId: userId}})
 
-        if(DOCTOR){ return res.status(400).json({message: `Doctor already exists`}) }
+        //if(DOCTOR){ return res.status(400).json({message: `Doctor already exists`}) }
 
         await Doctor.create({
             first_name: req.body.first_name, 
@@ -85,3 +85,21 @@ exports.add_doctor = async (req, res) => {
         return res.status(400).json({message: 'Something went wrong!!!'})
     }
  } 
+
+ exports.get_current_doctor = async (req, res) => { //console.log(req.user)
+    try {
+
+        if(!req.user.is_doctor) return res.sendStatus(403)
+
+        const DOCTOR = await Doctor.findOne({where: {UserId: req.user.id}})
+        //console.log(DOCTOR)
+
+        if(!DOCTOR) return {};
+
+        return res.status(200).json(DOCTOR);
+
+    } catch (error) {
+        logger.error(error);
+        return res.status(400).json({message: 'Something went wrong!!!'})
+    }
+ }

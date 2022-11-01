@@ -18,18 +18,22 @@ export class UsersService extends UserData {
   }
 
 
-  getCurrentUser(): Observable<User> {
-    return this.authService.isAuthenticated()
-      .pipe(
-        switchMap(authenticated => {
-          return authenticated ? this.api.getCurrent() : of(null);
-        }),
-        map(u => {
-          if (u && !u.setting) {
-            u.setting = {};
-          }
-        return u;
-      }));
+  // getCurrentUser(): Observable<User> {
+  //   return this.authService.isAuthenticated()
+  //     .pipe(
+  //       switchMap(authenticated => {
+  //         return authenticated ? this.api.getCurrent() : of(null);
+  //       }),
+  //       map(u => {
+  //         if (u && !u.setting) {
+  //           u.setting = {};
+  //         }
+  //       return u;
+  //     }));
+  // }
+
+  getCurrentUser(): Observable<any> {
+    return this.api.getCurrent();
   }
 
   getAll(user: any): Observable<User> {

@@ -64,16 +64,17 @@ const { saltHashPassword } = require('../../../utils/cipher');
     }
  }
 
- exports.get_current_patient = async (req, res) => {
+ exports.get_current_patient = async (req, res) => { //console.log(req.user)
     try {
 
-        if(req.user.is_patient) return res.sendStatus(403)
+        if(!req.user.is_patient) return res.sendStatus(403)
 
         const PATIENT = await Patient.findOne({where: {UserId: req.user.id}})
+        //console.log(PATIENT)
 
         if(!PATIENT) return {};
 
-        return PATIENT;
+        return res.status(200).json(PATIENT);
 
     } catch (error) {
         logger.error(error);

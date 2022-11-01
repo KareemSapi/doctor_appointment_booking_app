@@ -23,4 +23,7 @@ router.post('/add',auth, validator.validate("add_doctor"), doctorController.add_
 //route to search for doctors
 router.get('/:term', auth, doctorController.get_doctor_by_specialization)
 
+//route to get doctor by auth token
+router.get('/current/doctor', auth, doctorController.get_current_doctor);
+
 module.exports = router;

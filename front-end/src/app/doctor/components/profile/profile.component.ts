@@ -30,10 +30,8 @@ export class ProfileComponent implements OnInit {
   private router          : Router,
   private route           : ActivatedRoute,
   private doctorService   : DoctorsService
-  //private profileService  : ProfileDataService,
   ){
   const userId : any = this.route.snapshot.paramMap.get('id');
-  //this.getProfile(userId)
   }
 
    //Form getters
@@ -50,6 +48,8 @@ export class ProfileComponent implements OnInit {
  
 
   ngOnInit(): void {
+
+    this.getProfile()
 
       //Form validators.
   const postTopicValidators = [];
@@ -75,32 +75,32 @@ export class ProfileComponent implements OnInit {
  });
   }
 
-  // getProfile(id: any){
-  //   this.profileService.get(id)
-  //    .subscribe(res => {
-  //      this.profile = res;
-  //      console.log(this.profile)
-  //      this.profileForm.setValue({
-  //       firstName                     : this.profile.firstName,
-  //       middleName                    : this.profile.middleName,
-  //       surName                       : this.profile.surName,
-  //       date_of_birth                 : this.profile.date_of_birth,
-  //       gender                        : this.profile.gender,
-  //       country                       : this.profile.country,
-  //       city                          : this.profile.city,
-  //       postalAddress                 : this.profile.postalAddress,
-  //       physicalAddress               : this.profile.physicalAddress,
-  //       phone                         : this.profile.phoneNumber,
-  //      });
-  //    });
-  // }
+  getProfile(){
+    this.doctorService.getCurrent()
+     .subscribe(res => {
+       this.profile = res;
+       //console.log(this.profile)
+       this.profileForm.setValue({
+        firstName                     : this.profile.first_name,
+        middleName                    : this.profile.middle_name,
+        surName                       : this.profile.last_name,
+        date_of_birth                 : this.profile.date_of_birth,
+        gender                        : this.profile.gender,
+        specialization                : this.profile.specialization,
+        qualification                 : this.profile.qualification,
+        registrationNumber            : this.profile.registration_number,
+        Address                       : this.profile.address,
+        phone                         : this.profile.phone_number,
+       });
+     });
+  }
 
   save(): void {
 
-    const data = JSON.stringify({
+    const data = {
       first_name: this.profileForm.value.firstName,
       middle_name: this.profileForm.value.middleName,
-      sur_name: this.profileForm.value.surName,
+      last_name: this.profileForm.value.surName,
       phone_number: this.profileForm.value.phone,
       date_of_birth: this.profileForm.value.date_of_birth,
       gender: this.profileForm.value.gender,
@@ -108,8 +108,8 @@ export class ProfileComponent implements OnInit {
       registration_number: this.profileForm.value.registrationNumber,
       qualification: this.profileForm.value.qualification,
       specialization: this.profileForm.value.specialization,
-    
-    })
+    }
+
 
     this.doctorService.add(data)
      .subscribe(res => {
@@ -120,11 +120,10 @@ export class ProfileComponent implements OnInit {
         return;
       }else{
         this.profileForm.reset();
-        this.router.navigate(['/doctor/appointment'])
+        this.router.navigate(['/doctor/profile'])
       }
      })
   }
-
 
 
 }

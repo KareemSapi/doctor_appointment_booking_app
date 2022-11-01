@@ -13,9 +13,8 @@ export class DoctorsApi {
   constructor(private api: HttpService) {}
 
   getCurrent(): Observable<any> {
-    return this.api.get(`${this.apiController}/current`)
+    return this.api.get(`${this.apiController}/current/doctor`)
       .pipe(map(data => {
-        //const picture = `${this.api.apiUrl}/${this.apiController}/${data.id}/photo`;
         return { ...data };
       }));
   }

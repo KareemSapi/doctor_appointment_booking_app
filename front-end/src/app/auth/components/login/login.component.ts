@@ -10,6 +10,7 @@ import {
 import { getDeepFromObject } from '../../helpers';
 import { NbThemeService } from '@nebular/theme';
 import { InitUserService } from '../../../theme/services/init-user.service';
+import { UserStore } from 'src/app/core/stores/user.store';
 // import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -49,6 +50,7 @@ export class LoginComponent implements OnInit {
     private fb                                 : FormBuilder,
     protected router                           : Router,
     protected initUserService                  : InitUserService,
+    protected userStore                        : UserStore,
     // private spinner                            : NgxSpinnerService
     ) { }
 
@@ -102,9 +104,11 @@ export class LoginComponent implements OnInit {
       
       if (result.isSuccess()) {
         this.messages = result.getMessages();
+        //this.initUserService.initCurrentUser();
 
         let token = result.getToken().getPayload()
         //console.log(token)
+        //this.userStore.value = token;
 
         setTimeout(() => {
           return token.is_patient? this.router.navigate(['/patient']): this.router.navigate(['/doctor']);

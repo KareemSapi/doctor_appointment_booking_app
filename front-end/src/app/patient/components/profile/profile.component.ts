@@ -50,6 +50,8 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.getProfile()
+
       //Form validators.
   const postTopicValidators = [];
   const postTitleValidators = [];
@@ -73,26 +75,54 @@ export class ProfileComponent implements OnInit {
  });
   }
 
-  getProfile(id: any){
-    this.patientService.get(id)
+  getProfile(){
+    this.patientService.getCurrent()
      .subscribe(res => {
        this.profile = res;
-       console.log(this.profile)
+       //console.log(this.profile)
        this.profileForm.setValue({
-        firstName                     : this.profile.firstName,
-        middleName                    : this.profile.middleName,
-        surName                       : this.profile.surName,
+        firstName                     : this.profile.first_name,
+        middleName                    : this.profile.middle_name,
+        surName                       : this.profile.last_name,
         date_of_birth                 : this.profile.date_of_birth,
         gender                        : this.profile.gender,
         medicalConditions             : this.profile.medical_conditions,
         bloodGroup                    : this.profile.blood_group,
-        Address                       : this.profile.Address,
-        phone                         : this.profile.phoneNumber,
+        Address                       : this.profile.address,
+        phone                         : this.profile.phone_number,
        });
      });
   }
 
-update(){}
+  save(): void {
+
+    const data = {
+      first_name: this.profileForm.value.firstName,
+      middle_name: this.profileForm.value.middleName,
+      sur_name: this.profileForm.value.surName,
+      phone_number: this.profileForm.value.phone,
+      date_of_birth: this.profileForm.value.date_of_birth,
+      gender: this.profileForm.value.gender,
+      address: this.profileForm.value.Address,
+      blood_group: this.profileForm.value.bloodGroup,
+      medical_conditions: this.profileForm.value.medicalConditions,
+      //specialization: this.profileForm.value.specialization,
+    }
+
+
+    this.patientService.add(data)
+     .subscribe(res => {
+      if(!res){
+        setTimeout(() => {
+         this.loading = false 
+        }, 3000);
+        return;
+      }else{
+        //this.profileForm.reset();
+        this.router.navigate(['/patient/profile'])
+      }
+     })
+  }
 
 
 }

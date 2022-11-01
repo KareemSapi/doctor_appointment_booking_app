@@ -19,4 +19,8 @@ export class DoctorsService {
   add(data: any): Observable<any> {
     return this.api.add(data)
   }
+
+  getCurrent(): Observable<any> {
+    return this.api.getCurrent();
+  }
 }
