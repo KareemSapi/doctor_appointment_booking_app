@@ -26,7 +26,6 @@ export class DoctorsApi {
   get(id: any): Observable<any> {
     return this.api.get(`${this.apiController}/${id}`)
       .pipe(map(data => {
-        //const picture = `${this.api.apiUrl}/${this.apiController}/${data.id}/photo`;
         return { ...data };
       }));
   }
@@ -43,7 +42,7 @@ searchDoctors(term: string): Observable<Doctor[]> {
     // if not search term, return empty hero array.
     return of([]);
   }
-  return this.api.get(`${this.apiController}/${term}`).pipe(
+  return this.api.get(`${this.apiController}/search/${term}`).pipe(
     tap(x => x.length ?
        this.log(`found doctors matching "${term}"`) :
        this.log(`no doctors matching "${term}"`)),

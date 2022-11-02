@@ -110,7 +110,7 @@ export class ProfileComponent implements OnInit {
     }
 
 
-    this.patientService.add(data)
+    this.patientService.update(data)
      .subscribe(res => {
       if(!res){
         setTimeout(() => {

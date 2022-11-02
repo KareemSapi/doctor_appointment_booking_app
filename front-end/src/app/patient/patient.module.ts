@@ -44,7 +44,7 @@ const NB_MODULES = [
 
 
 @NgModule({
-  declarations: [routedComponents],
+  declarations: [...routedComponents],
   imports: [
     CommonModule,
     PatientRoutingModule,

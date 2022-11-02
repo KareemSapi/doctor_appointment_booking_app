@@ -23,4 +23,8 @@ export class DoctorsService {
   getCurrent(): Observable<any> {
     return this.api.getCurrent();
   }
+
+  get(id: any): Observable<any> {
+    return this.api.get(id);
+  }
 }

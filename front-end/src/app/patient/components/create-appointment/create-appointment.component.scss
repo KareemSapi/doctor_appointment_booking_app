@@ -1,0 +1,26 @@
+
+@import '../../../../../node_modules//@nebular/theme/styles/core/mixins';
+@import '../../../theme/themes.scss';
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+:host {
+    button {
+      @include nb-ltr(margin, 0 0.75rem 0 0);
+      @include nb-rtl(margin, 0 0 0 0.75rem);
+    }
+
+    nb-card {
+      margin: 0;
+    }
+
+    .navigation .link {
+      text-decoration: none;
+
+      .icon {
+        font-size: 1.5rem;
+      }
+    }
+  }

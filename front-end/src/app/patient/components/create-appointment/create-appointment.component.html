@@ -1,0 +1,80 @@
+<div class="row">
+    <div class="col-lg-8 offset-md-2">
+      <nb-card>
+        <!-- <nb-card-header>
+            <nav class="navigation">
+              <a (click)="back()" class="link" aria-label="Back">
+                <i class="icon  nb-arrow-thin-left"></i>
+              </a>
+          </nav>
+        </nb-card-header> -->
+    
+        <nb-card-body>
+  <form
+  [formGroup]="appointmentForm"
+  (submit)="save()" 
+  aria-labelledby="title"
+  autocomplete="off"
+  >
+  <div class="row form-group justify-content-center">
+      <input
+       nbInput
+       fullWidth 
+       type="text" 
+       id="name"
+       formControlName="name"
+       placeholder="Name of Doctor"
+      />
+  </div>
+  <div class="row form-group justify-content-center">
+    <input
+     nbInput 
+     fullWidth
+     type="text" 
+     id="registrationNUmber"
+     formControlName="registrationNumber"
+     placeholder="Registration Number"
+    />
+  </div>
+  <div class="row form-group justify-content-center">
+    <input
+     nbInput
+     fullWidth 
+     type="text" 
+     id="specialization"
+     formControlName="specialization"
+     placeholder="Specialization"
+    />
+  </div>
+  <div class="row form-group justify-content-center">
+    <input 
+     nbInput
+     fullWidth
+     type="text" 
+     id="qualification"
+     formControlName="qualification"
+     placeholder="Qualifications"
+    />
+  </div>
+  <div class="row form-group justify-content-center">
+      <input
+       nbInput
+       fullWidth 
+       type="datetime-local" 
+       id="time"
+       formControlName="time"
+       placeholder="Pick appointment date"/>
+  </div>
+    <button
+    nbButton
+    class="btn btn-primary btn-sm"
+    style="padding-left: 2.5rem; padding-right: 2.5rem;"
+    type="submit"
+    [disabled] = "submitted || appointmentForm.invalid"
+   >Submit</button>
+</form>
+</nb-card-body>
+</nb-card>
+</div>
+
+</div>

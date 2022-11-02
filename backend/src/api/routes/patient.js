@@ -23,4 +23,7 @@ router.post('/add', validator.validate("add_patient"), patientController.add_pat
 //route to get patient by auth token
 router.get('/current', auth, patientController.get_current_patient);
 
+//route to update patient
+router.put('/', validator.validate('add_patient'), patientController.update_patient)
+
 module.exports = router;

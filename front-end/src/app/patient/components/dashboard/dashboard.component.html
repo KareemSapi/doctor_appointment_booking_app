@@ -24,33 +24,18 @@
               </div>
 
               <form
-              [formGroup]="appointmentForm"
-              (submit)="save()" 
+              (submit)="createAppointment(doctor)" 
               aria-labelledby="title"
               autocomplete="off"
+              class="justify-content-center"
               >
-                <div class="row">
-                  <input 
-                   type="text" 
-                   id="doctorId"
-                   formControlName="doctorId"
-                   [value]=doctor.id
-                  />
-              </div>
-              <div class="row appointment">
-                  <input 
-                   type="datetime-local" 
-                   id="time"
-                   formControlName="time"
-                   placeholder="Pick appointment date"/>
-              </div>
-              <div class="row justify-content-center appointment">
+              
                 <button
                 class="btn btn-primary btn-sm"
                 style="padding-left: 2.5rem; padding-right: 2.5rem;"
                 type="submit"
-               >Make Appointment</button>
-              </div>
+               >Create Appointment</button>
+              
             </form>
             </div>
          </div>

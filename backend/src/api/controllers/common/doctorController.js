@@ -42,7 +42,23 @@ exports.add_doctor = async (req, res) => {
         //Check if respective doctor already has a profile
         const DOCTOR = await Doctor.findOne({where: {UserId: userId}})
 
-        //if(DOCTOR){ return res.status(400).json({message: `Doctor already exists`}) }
+        //update doctor if exists
+        if(DOCTOR){
+            DOCTOR.update({
+                first_name: req.body.first_name, 
+                middle_name: req.body.middle_name, 
+                last_name: req.body.last_name, 
+                date_of_birth: req.body.date_of_birth, 
+                gender: req.body.gender,
+                phone_number:req.body.phone_number,
+                address: req.body.address, 
+                registration_number: req.body.registration_number, 
+                qualification: req.body.qualification, 
+                specialization: req.body.specialization,
+            })
+
+            return res.status(201).json({message: 'profile updated!'})
+        }
 
         await Doctor.create({
             first_name: req.body.first_name, 
@@ -92,6 +108,22 @@ exports.add_doctor = async (req, res) => {
         if(!req.user.is_doctor) return res.sendStatus(403)
 
         const DOCTOR = await Doctor.findOne({where: {UserId: req.user.id}})
+        //console.log(DOCTOR)
+
+        if(!DOCTOR) return {};
+
+        return res.status(200).json(DOCTOR);
+
+    } catch (error) {
+        logger.error(error);
+        return res.status(400).json({message: 'Something went wrong!!!'})
+    }
+ }
+
+ exports.get_doctor_by_id = async (req, res) => { 
+    try {
+
+        const DOCTOR = await Doctor.findOne({where: {id: req.params.id}})
         //console.log(DOCTOR)
 
         if(!DOCTOR) return {};

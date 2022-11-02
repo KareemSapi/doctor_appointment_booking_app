@@ -33,5 +33,9 @@ export class PatientsApi {
   add(data: any): Observable<any> {
     return this.api.post(`${this.apiController}/add`, data)
   }
+
+  update(data: any): Observable<any> {
+    return this.api.put(`${this.apiController}/`, data);
+  }
   
 }

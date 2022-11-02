@@ -28,6 +28,10 @@ export class PatientsService {
   }
 
   add(data: any): Observable<any> {
-    return this.api.add(data)
+    return this.api.add(data);
+  }
+
+  update(data: any): Observable<any> {
+    return this.api.update(data);
   }
 }
