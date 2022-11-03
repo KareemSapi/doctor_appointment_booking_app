@@ -96,14 +96,27 @@
     <div class="col-sm-12">
       <label for="time">Appointment Time:</label>
       <input
-       nbInput
+       nbInput 
        fullWidth 
-       type="datetime-local" 
+       type="text" 
        id="time"
        formControlName="time"
        placeholder="Pick appointment date"
        />
     </div>
+</div>
+<div class="form-group-group row">
+  <div class="col-sm-12">
+  <label for="symptoms">Patient Symptoms:</label>
+  <textarea
+    nbInput
+    fullWidth
+    rows="5"
+    id="symptoms"
+    placeholder="Patient Symptoms"
+    formControlName="symptoms"
+   ></textarea>
+  </div>
 </div>
 <div class="form-group-group row">
     <div class="col-sm-12">

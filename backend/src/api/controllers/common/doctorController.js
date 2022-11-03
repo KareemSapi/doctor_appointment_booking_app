@@ -28,9 +28,6 @@ exports.add_doctor = async (req, res) => {
     }
 
     const userId = req.user.id
-    //console.log(req.body)
-
-    //const { first_name, middle_name, last_name, date_of_birth, gender, phone_number, address, registration_number, qualification, specialization } = req.body
 
     try {
         const USER = await Users.findOne({where: {id: userId}})
@@ -44,7 +41,7 @@ exports.add_doctor = async (req, res) => {
 
         //update doctor if exists
         if(DOCTOR){
-            DOCTOR.update({
+            await DOCTOR.update({
                 first_name: req.body.first_name, 
                 middle_name: req.body.middle_name, 
                 last_name: req.body.last_name, 
@@ -85,12 +82,11 @@ exports.add_doctor = async (req, res) => {
  /**
   * @method: search for doctors based on their specialization
   */
- exports.get_doctor_by_specialization = async (req, res) => { //console.log(req.params)
+ exports.get_doctor_by_specialization = async (req, res) => { 
     const term = req.params.term; 
 
     try {
         const DOCTORS = await Doctor.findAll({where: {specialization: term}})
-        //console.log(DOCTORS)
         
         if(!DOCTORS){ return res.status(200).json([])}
 
@@ -102,13 +98,12 @@ exports.add_doctor = async (req, res) => {
     }
  } 
 
- exports.get_current_doctor = async (req, res) => { //console.log(req.user)
+ exports.get_current_doctor = async (req, res) => { 
     try {
 
         if(!req.user.is_doctor) return res.sendStatus(403)
 
         const DOCTOR = await Doctor.findOne({where: {UserId: req.user.id}})
-        //console.log(DOCTOR)
 
         if(!DOCTOR) return {};
 
@@ -124,7 +119,6 @@ exports.add_doctor = async (req, res) => {
     try {
 
         const DOCTOR = await Doctor.findOne({where: {id: req.params.id}})
-        //console.log(DOCTOR)
 
         if(!DOCTOR) return {};
 

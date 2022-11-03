@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {Validators, FormGroup, FormBuilder, FormControl} from '@angular/forms'
 import { AppointmentsService } from 'src/app/core/backend/services/appointments.service';
 import { PatientsService } from 'src/app/core/backend/services/patients.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-edit-appointment',
@@ -19,6 +20,7 @@ export class EditAppointmentComponent implements OnInit {
 
   get time() { return this.appointmentForm.get('time'); }
   get gender() { return this.appointmentForm.get('gender'); }
+  get symptoms() { return this.appointmentForm.get('symptoms'); }
   get bloodGroup() { return this.appointmentForm.get('bloodGroup'); }
   get medicalConditions() { return this.appointmentForm.get('medicalConditions'); }
   get name() { return this.appointmentForm.get('name');}
@@ -30,6 +32,7 @@ export class EditAppointmentComponent implements OnInit {
     private appointmentService: AppointmentsService,
     private router: Router,
     private route: ActivatedRoute,
+    private date: DatePipe
   ) { }
 
   ngOnInit(): void {
@@ -44,6 +47,7 @@ export class EditAppointmentComponent implements OnInit {
       gender                : new FormControl({value: null, disabled: true},{validators:[Validators.required]}),
       bloodGroup            : new FormControl({value: null, disabled: true},{validators:[Validators.required]}),
       medicalConditions     : new FormControl({value: null, disabled: true},{validators:[Validators.required]}),
+      symptoms              : new FormControl({value: null, disabled: true},{validators:[Validators.required]}),
       remarks               : new FormControl(null, {validators:[Validators.required]}),
     });
   }
@@ -52,19 +56,16 @@ export class EditAppointmentComponent implements OnInit {
     this.appointmentService.get(id)
      .subscribe(res => {
        this.appointment = res;
-       console.log(this.appointment)
+       //console.log(this.appointment)
        this.appointmentForm.setValue({
         name                          : `${this.appointment.first_name} ${this.appointment.middle_name} ${this.appointment.last_name}`,
-        //middleName                    : this.profile.middle_name,
-        //surName                       : this.profile.last_name,
-        //date_of_birth                 : this.profile.date_of_birth,
         gender                        : this.appointment.gender,
         bloodGroup                    : this.appointment.blood_group,
         medicalConditions             : this.appointment.medical_conditions,
         remarks                       : this.appointment.remarks,
-        //Address                       : this.profile.address,
+        symptoms                      : this.appointment.symptoms,
         //phone                         : this.profile.phone_number,
-        time                          : this.appointment.time,
+        time                          : this.date.transform(this.appointment.time, 'medium'),
         age                           : this.appointment.age
 
        });

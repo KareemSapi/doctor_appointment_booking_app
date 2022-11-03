@@ -40,6 +40,7 @@ exports.create_appointment = async (req, res) => {
             time: req.body.time,
             DoctorId: req.body.doctorId,
             PatientId: PATIENT.dataValues.id,
+            patient_feedback: req.body.patient_symptoms,
             createdBy: id
         });
 
@@ -68,7 +69,6 @@ exports.get_appointments = async (req, res) => {
 
         }else{
             const DOCTOR = await Doctor.findOne({where: {UserId: id}})
-            console.log(DOCTOR)
 
             APPOINTMENTS = await Appointment.findAll({where: {DoctorId: DOCTOR.dataValues.id}})
             //console.log(APPOINTMENTS)
@@ -131,6 +131,8 @@ function map_appointment(appointment, patient){
         return Math.abs(age.getFullYear() - 1970);
     }
 
+    console.log(appointment)
+
     return {
         id: appointment.id,
         first_name: patient.first_name,
@@ -142,6 +144,6 @@ function map_appointment(appointment, patient){
         age: getAge(patient.date_of_birth),
         time: appointment.time,
         remarks: appointment.doctor_remarks,
-        //symptoms: appointment.patient_feedback,
+        symptoms: appointment.patient_symptoms,
     }
 }

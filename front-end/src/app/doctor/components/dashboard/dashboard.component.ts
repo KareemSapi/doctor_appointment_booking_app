@@ -29,7 +29,8 @@ export class DashboardComponent implements OnInit {
       }else{
         this.appointments = data
         this.appointments.slice(0,2)
-        console.log(this.appointments)
+        this.appointments.reverse()
+        //console.log(this.appointments)
       }
      })
   }

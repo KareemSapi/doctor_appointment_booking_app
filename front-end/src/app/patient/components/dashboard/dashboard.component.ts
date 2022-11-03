@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
   }
 
   createAppointment(item: any): void{
-    this.router.navigate(['/patient/create-appointment/', item.id])
+    this.router.navigate([`/patient/appointment/${item.id}/create`])
   }
 
 }

@@ -29,7 +29,8 @@ export class AppointmentComponent implements OnInit {
         this.appointments = []
       }else{
         this.appointments = data
-        console.log(this.appointments)
+        this.appointments.reverse()
+        //console.log(this.appointments)
       }
      })
   }

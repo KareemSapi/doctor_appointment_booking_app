@@ -27,9 +27,13 @@ export class AppointmentComponent implements OnInit {
         this.appointments = []
       }else{
         this.appointments = data
-        //console.log(this.appointments)
+        this.appointments.reverse()
       }
      })
+  }
+
+  details(item: any){
+    //return this.router.navigate([`/doctor/appointment/${item.id}/details`])
   }
 
 }

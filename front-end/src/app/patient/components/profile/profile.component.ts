@@ -99,14 +99,13 @@ export class ProfileComponent implements OnInit {
     const data = {
       first_name: this.profileForm.value.firstName,
       middle_name: this.profileForm.value.middleName,
-      sur_name: this.profileForm.value.surName,
+      last_name: this.profileForm.value.surName,
       phone_number: this.profileForm.value.phone,
       date_of_birth: this.profileForm.value.date_of_birth,
       gender: this.profileForm.value.gender,
       address: this.profileForm.value.Address,
       blood_group: this.profileForm.value.bloodGroup,
       medical_conditions: this.profileForm.value.medicalConditions,
-      //specialization: this.profileForm.value.specialization,
     }
 
 

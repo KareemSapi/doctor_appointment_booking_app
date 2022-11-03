@@ -37,11 +37,12 @@ export class CreateAppointmentComponent implements OnInit {
     this.getDoctorProfile(id);
 
     this.appointmentForm = new FormGroup({
-      name                  : new FormControl(null, {validators:[Validators.required]}),
+      name                  : new FormControl({value: null, disabled: true}, {validators:[Validators.required]}),
       time                  : new FormControl(null, {validators:[Validators.required]}),
-      registrationNumber    : new FormControl(null,{validators:[Validators.required]}),
-      qualification         : new FormControl(null,{validators:[Validators.required]}),
-      specialization        : new FormControl(null,{validators:[Validators.required]}),
+      registrationNumber    : new FormControl({value: null, disabled: true},{validators:[Validators.required]}),
+      qualification         : new FormControl({value: null, disabled: true},{validators:[Validators.required]}),
+      specialization        : new FormControl({value: null, disabled: true},{validators:[Validators.required]}),
+      symptoms              : new FormControl(null,{validators:[Validators.required]}),
     });
   }
 
@@ -61,7 +62,8 @@ export class CreateAppointmentComponent implements OnInit {
         registrationNumber            : this.profile.registration_number,
         //Address                       : this.profile.address,
         //phone                         : this.profile.phone_number,
-        time                          : null
+        time                          : null,
+        symptoms                      : null,
        });
      });
   }
@@ -70,7 +72,8 @@ export class CreateAppointmentComponent implements OnInit {
 
     this.data = {
       time: this.appointmentForm.value.time,
-      doctorId: this.profile.id
+      doctorId: this.profile.id,
+      patient_symptoms: this.appointmentForm.value.symptoms,
     }
 
     this.submitted = true;

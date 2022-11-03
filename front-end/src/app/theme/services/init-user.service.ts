@@ -17,7 +17,7 @@ export class InitUserService {
 
     initCurrentUser(): Observable<User> {
       return this.usersService.getCurrentUser()
-            .pipe(tap((user: User) => { console.log(user)
+            .pipe(tap((user: User) => { 
                 if (user) { 
                     this.userStore.value = user;
                 }

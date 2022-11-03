@@ -40,7 +40,7 @@
         allowNull: true
     },
 
-    patient_feedback: {
+    patient_symptoms: {
         type: Sequelize.TEXT,
         allowNull: true
     },

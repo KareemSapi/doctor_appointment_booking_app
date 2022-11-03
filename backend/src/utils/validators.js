@@ -61,6 +61,19 @@ exports.validate = (method) => {
             ]
         }
 
+        case "update_patient": {
+            return [
+                check('first_name', 'First Name can\'t be empty').exists().trim(),
+                check('middle_name').trim(),
+                check('last_name', 'Last Name can\'t be empty').exists().trim(),
+                check('date_of_birth', 'Date of Birth can\'t be empty').exists().isDate({format: 'YYYY-MM-DD'}).trim(),
+                check('gender', 'Gender can\'t be empty').exists().trim(),
+                // check('email', 'Invalid email').exists().isEmail().trim(),
+                // check('password').trim().isLength({min: 8}),
+                // check('confirm_password').trim(),
+            ]
+        }
+
         case "add_appointment": {
             return [
                 check('time', 'Start time can\'t be empty').exists().trim(),

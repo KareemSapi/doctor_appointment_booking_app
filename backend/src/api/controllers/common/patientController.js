@@ -96,7 +96,9 @@ const { saltHashPassword } = require('../../../utils/cipher');
 
         const PATIENT = await Patient.findOne({where: {UserId: req.user.id}})
 
-        PATIENT.update({
+        if(!PATIENT){ return res.status(400).json({message: 'Something went wrong!!!'})}
+
+        PATIENT.set({
             first_name: req.body.first_name,
             middle_name: req.body.middle_name,
             last_name: req.body.last_name,
@@ -107,6 +109,8 @@ const { saltHashPassword } = require('../../../utils/cipher');
             blood_group: req.body.blood_group,
             medical_conditions: req.body.medical_conditions,
         })
+
+        await PATIENT.save()
 
         return res.status(201).json({message: 'Patient successfully updated'});
 

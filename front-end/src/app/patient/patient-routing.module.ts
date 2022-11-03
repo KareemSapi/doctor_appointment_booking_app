@@ -31,7 +31,7 @@ const routes: Routes = [{
     },
 
     {
-      path: 'create-appointment/:id',
+      path: 'appointment/:id/create',
       component: CreateAppointmentComponent
     },
   ]
