@@ -27,9 +27,8 @@ export class AppointmentsApi {
   }
 
   get(id: any): Observable<any> {
-    return this.api.get(`${this.apiController}/${id}`)
+    return this.api.get(`${this.apiController}/${id}/details`)
       .pipe(map(data => {
-        //const picture = `${this.api.apiUrl}/${this.apiController}/${data.id}/photo`;
         return { ...data };
       }));
   }

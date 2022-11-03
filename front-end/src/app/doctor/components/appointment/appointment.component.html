@@ -7,11 +7,16 @@
         <nb-list>
             <nb-list-item *ngFor="let appointment of appointments">
                 <div class="row container-fluid">
-                    {{ appointment }}
-                </div>
-                <div class="row container-fluid">
-                    <button>Cancel</button>
-                </div>
+                    <h4><b>Date/Time:</b> {{appointment.time | date: 'medium'}}</h4>
+                </div>               
+                <button
+                 nbButton
+                 status="success"
+                 type="button"
+                 class="btn-success"
+                 (click)="details(appointment)"
+                >Details
+                </button>
               </nb-list-item>
         </nb-list>
     </nb-card-body>

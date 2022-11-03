@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DoctorsService } from 'src/app/core/backend/services/doctors.service';
 import { AppointmentsService } from 'src/app/core/backend/services/appointments.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-appointment',
@@ -13,7 +14,8 @@ export class AppointmentComponent implements OnInit {
 
   constructor(
     private appointment: AppointmentsService,
-    private doctor: DoctorsService
+    private doctor: DoctorsService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -30,6 +32,10 @@ export class AppointmentComponent implements OnInit {
         console.log(this.appointments)
       }
      })
+  }
+
+  details(item: any){
+    return this.router.navigate([`/doctor/appointment/${item.id}/details`])
   }
   
 

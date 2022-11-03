@@ -68,7 +68,7 @@ exports.get_appointments = async (req, res) => {
 
         }else{
             const DOCTOR = await Doctor.findOne({where: {UserId: id}})
-            //console.log(DOCTOR.dataValues.id)
+            console.log(DOCTOR)
 
             APPOINTMENTS = await Appointment.findAll({where: {DoctorId: DOCTOR.dataValues.id}})
             //console.log(APPOINTMENTS)
@@ -84,23 +84,21 @@ exports.get_appointments = async (req, res) => {
 }
 
 /**
- * @method: get appointments by doctor id
+ * @method: get appointments by its respective id
  */
- exports.get_appointments_by_doctor_id = async (req, res) => {
-    const id = req.user.id
+ exports.get_appointment_by_id = async (req, res) => {
+    const id = req.params.id
 
     try {
-        const DOCTOR = await Doctor.findOne({where: {UserId: id}})
+        const APPOINTMENT = await Appointment.findOne({where: {id: id}})
+        //console.log(APPOINTMENT)
+        const PATIENT = await Patient.findOne({where: {id: APPOINTMENT.dataValues.PatientId}})
 
-        if(!DOCTOR){ return res.status(400).json({message: 'Something went wrong!!!'})}
-
-        const APPOINTMENTS = await Appointment.findAll({where: {DoctorId: DOCTOR.dataValues.id}})
-
-        return res.status(200).json(APPOINTMENTS)
+        !APPOINTMENT && !PATIENT? {}: res.status(200).json(map_appointment(APPOINTMENT, PATIENT));
 
     } catch (error) {
-         logger.error(error)
-        return res.status(400).json({message: 'Something went wrong!!!'})
+        logger.error(error);
+        return res.status(400).json({message: 'Something went wrong!!!'});
     }
 }
 
@@ -120,5 +118,30 @@ exports.confirm_appointment = async (req, res) => {
     } catch (error) {
          logger.error(error)
         return res.status(400).json({message: 'Something went wrong!!!'})
+    }
+}
+
+//map appointment data & patient data
+function map_appointment(appointment, patient){
+
+    function getAge(dob){
+        var diff = Date.now() - Date.parse(dob);
+        var age = new Date(diff)
+
+        return Math.abs(age.getFullYear() - 1970);
+    }
+
+    return {
+        id: appointment.id,
+        first_name: patient.first_name,
+        middle_name: patient.middle_name,
+        last_name: patient.last_name,
+        gender: patient.gender,
+        blood_group: patient.blood_group,
+        medical_conditions: patient.medical_conditions,
+        age: getAge(patient.date_of_birth),
+        time: appointment.time,
+        remarks: appointment.doctor_remarks,
+        //symptoms: appointment.patient_feedback,
     }
 }

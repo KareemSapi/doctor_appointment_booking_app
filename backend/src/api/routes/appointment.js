@@ -23,6 +23,9 @@ router.post('/add', validator.validate("add_appointment"), appointmentController
 //router to get all appointments
 router.get('/all', appointmentController.get_appointments);
 
+//route to get appointment by id
+router.get('/:id/details', appointmentController.get_appointment_by_id)
+
 router.put('/confirm', appointmentController.confirm_appointment);
 
 

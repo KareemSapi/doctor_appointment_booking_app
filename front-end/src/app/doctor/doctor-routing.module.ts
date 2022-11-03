@@ -5,7 +5,8 @@ import { DoctorComponent } from './doctor.component';
 import { 
   DashboardComponent,
   AppointmentComponent,
-  ProfileComponent
+  ProfileComponent,
+  EditAppointmentComponent,
  } from './components';
 
 const routes: Routes = [{
@@ -29,10 +30,10 @@ const routes: Routes = [{
       component: ProfileComponent
     },
 
-    // {
-    //   path: 'dashboard',
-    //   component: DashboardComponent
-    // },
+    {
+      path: 'appointment/:id/details',
+      component: EditAppointmentComponent
+    },
   ]
 }];
 
@@ -46,5 +47,6 @@ export const routedComponents = [
   DoctorComponent,
   DashboardComponent,
   AppointmentComponent,
-  ProfileComponent
+  ProfileComponent,
+  EditAppointmentComponent
 ];

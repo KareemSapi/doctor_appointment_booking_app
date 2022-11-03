@@ -1,1 +1,35 @@
-<p>dashboard works!</p>
+<div class="row">
+    <div class="col-lg-10 offset-md-1">
+        <nb-card>
+            <nb-card-header>
+                <h5>Recent Appointments</h5>
+            </nb-card-header>
+            <nb-card-body>
+                <nb-list>
+                    <nb-list-item *ngFor="let appointment of appointments">
+                        <div class="row container-fluid">
+                            <h6><b>Date/Time:</b> {{appointment.time | date: 'medium'}}</h6>
+                        </div>               
+                        <button
+                         nbButton
+                         status="success"
+                         type="button"
+                         class="btn-success"
+                         (click)="details(appointment)"
+                        >Details
+                        </button>
+                    </nb-list-item>
+                </nb-list>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>
+
+<!-- <div class="row justify-content-center">
+    <div class="col-lg-10 offset-md-2">
+        <nb-card>
+            <nb-card-header></nb-card-header>
+            <nb-card-body></nb-card-body>
+        </nb-card>
+    </div>
+</div> -->
