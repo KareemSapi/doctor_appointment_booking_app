@@ -26,7 +26,11 @@ autocomplete="off"
     id="firstName"
     formControlName="firstName"
     placeholder="First Name"
+    [status]="firstName?.dirty ? (firstName?.invalid  ? 'danger' : 'success') : ''"
+    [attr.aria-invalid]="firstName?.invalid && firstName?.touched ? true : null"
     >
+    <app-validation-message label="First Name" 
+     [showRequired]="firstName?.errors?.['required'] && firstName?.touched"></app-validation-message>
   </div>
 </div>
 

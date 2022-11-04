@@ -12,6 +12,7 @@ import { NbThemeService } from '@nebular/theme';
 import { InitUserService } from '../../../theme/services/init-user.service';
 import { UserStore } from 'src/app/core/stores/user.store';
 // import { NgxSpinnerService } from 'ngx-spinner';
+import { EMAIL_PATTERN } from '../constants'
 
 @Component({
   selector: 'app-login',
@@ -55,19 +56,19 @@ export class LoginComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    // const emailValidators = [
-    //   Validators.pattern(EMAIL_PATTERN),
-    // ];
-    // this.isEmailRequired && emailValidators.push(Validators.required);
+    const emailValidators = [
+      Validators.pattern(EMAIL_PATTERN),
+    ];
+    this.isEmailRequired && emailValidators.push(Validators.required);
 
     const passwordValidators = [
-      Validators.minLength(this.minLength),
-      Validators.maxLength(this.maxLength),
+      Validators.minLength(8),
+      Validators.maxLength(50),
     ];
     this.isPasswordRequired && passwordValidators.push(Validators.required);
 
     this.loginForm = this.fb.group({
-      email     : this.fb.control(''),
+      email     : this.fb.control('', [...emailValidators]),
       password  : this.fb.control('', [...passwordValidators]),
       rememberMe: this.fb.control(''),
     });

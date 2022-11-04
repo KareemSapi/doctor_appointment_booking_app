@@ -30,6 +30,7 @@ import { NbRoleProvider, NbSecurityModule } from '@nebular/security';
 import { authOptions } from './auth.settings';
 import { authSettings } from './access.settings';
 import { LogoutComponent } from './components/logout/logout.component';
+import { ComponentsModule } from '../components/components.module';
 
 const GUARDS = [
   AuthGuard,
@@ -70,7 +71,8 @@ export function filterInterceptorRequest(req: HttpRequest<any>): boolean {
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
-    CoreModule
+    CoreModule,
+    ComponentsModule
   ],
   exports: [
    ...routedComponents,

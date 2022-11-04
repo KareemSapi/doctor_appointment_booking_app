@@ -1,0 +1,13 @@
+
+
+@import '../../theme/themes.scss';
+@include nb-install-component() {
+   .warning {
+       color: nb-theme(color-danger-default);
+   }
+}
+
+.caption {
+    margin-top: 5px;
+    font-size: 14px;
+}

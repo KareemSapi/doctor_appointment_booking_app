@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CoreModule } from './core/core.module';
 import { AuthModule } from './auth/auth.module';
+import { ComponentsModule } from './components/components.module';
 
 import { AppComponent } from './app.component';
 
@@ -43,7 +44,6 @@ const NB_MODULES = [
 @NgModule({
   declarations: [
     AppComponent,
-    //PatientRegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +54,8 @@ const NB_MODULES = [
     FormsModule,
     AuthModule.forRoot(),
     CoreModule,
-    HttpClientModule
+    HttpClientModule,
+    ComponentsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

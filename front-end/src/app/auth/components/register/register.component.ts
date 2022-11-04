@@ -9,6 +9,7 @@ import {
 } from '@nebular/auth';
 import { getDeepFromObject } from '../../helpers';
 import { NbThemeService } from '@nebular/theme';
+import { EMAIL_PATTERN } from '../constants'
 
 
 @Component({
@@ -19,8 +20,8 @@ import { NbThemeService } from '@nebular/theme';
 })
 export class RegisterComponent implements OnInit {
 
-  minLength           : number = this.getConfigValue('forms.validation.password.minLength');
-  maxLength           : number = this.getConfigValue('forms.validation.password.maxLength');
+  minLength           : number = 8 //this.getConfigValue('forms.validation.password.minLength');
+  maxLength           : number = 50 //this.getConfigValue('forms.validation.password.maxLength');
   isOrgNameRequired   : boolean = this.getConfigValue('forms.validation.orgName.required');
   isGivenNameRequired : boolean = this.getConfigValue('forms.validation.givenName.required');
   isFamilyNameRequired: boolean = this.getConfigValue('forms.validation.familyName.required');
@@ -53,9 +54,9 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
 
     this.registrationForm = new FormGroup({
-      email                   : new FormControl(null,{validators:[Validators.required]}),
-      password                    : new FormControl(null),
-      confirmPassword                       : new FormControl(null,{validators:[Validators.required]}),
+      email                   : new FormControl(null,{validators:[Validators.required, Validators.pattern(EMAIL_PATTERN)]}),
+      password                : new FormControl(null, {validators:[Validators.required, Validators.minLength(8), Validators.maxLength(50)]}),
+      confirmPassword         : new FormControl(null,{validators:[Validators.required, Validators.minLength(8), Validators.maxLength(50)]}),
     })
   }
 

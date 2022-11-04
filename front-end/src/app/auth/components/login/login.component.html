@@ -12,6 +12,7 @@
           [formGroup]="loginForm" 
           aria-labelledby="title"
           autocomplete="off"
+          (keydown)="keyDownFunction($event)"
           >
             <!-- <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
               <p class="lead fw-normal mb-0 me-3">Sign in with</p>
@@ -34,26 +35,33 @@
   
             <!-- Email input -->
             <div class="form-outline mb-4">
-              <input 
+             <label class="form-label" for="email">Email</label>
+             <input 
               type="email" 
               id="email" 
               class="form-control form-control-lg"
               placeholder="Enter a valid email address"
-              formControlName="email" 
-              required="true" />
-              <label class="form-label" for="email">Email address</label>
+              formControlName="email"
+              />
+              <app-validation-message label="Email" [showPattern]="email?.hasError('pattern') && email?.touched"
+              [showRequired]="email?.errors?.['required'] && email?.touched"></app-validation-message>
             </div>
   
             <!-- Password input -->
             <div class="form-outline mb-3">
-              <input 
+              <label class="form-label" for="password">Password</label>
+              <input
               type="password" 
               id="password" 
               class="form-control form-control-lg"
               placeholder="Enter password"
               formControlName="password"
-              required />
-              <label class="form-label" for="password">Password</label>
+              />
+              <app-validation-message label="Password" [showMinLength]="password?.hasError('minlength') && password?.touched"
+               [showMaxLength]="password?.hasError('maxlength') && password?.touched"
+               [showRequired]="password?.errors?.['required'] && password?.touched"
+               [minLength]="minLength"
+               [maxLength]="maxLength"></app-validation-message>
             </div>
   
             <div class="d-flex justify-content-between align-items-center">
@@ -72,6 +80,7 @@
               type="button" 
               class="btn btn-primary btn-lg"
               (click)="login()" [disabled]="submitted"
+              [disabled]="submitted || !loginForm.valid"
               style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
               <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="/#/auth/register"
                   class="link-danger">Register</a></p>

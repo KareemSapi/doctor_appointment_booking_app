@@ -3,6 +3,7 @@ import { DatePipe } from '@angular/common';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PatientsService } from 'src/app/core/backend/services/patients.service';
+import { EMAIL_PATTERN } from '../constants';
 
 @Component({
   selector: 'app-patient-registration',
@@ -11,6 +12,8 @@ import { PatientsService } from 'src/app/core/backend/services/patients.service'
 })
 export class PatientRegistrationComponent implements OnInit {
 
+  minLength           : number = 8 //this.getConfigValue('forms.validation.password.minLength');
+  maxLength           : number = 50 //this.getConfigValue('forms.validation.password.maxLength');
   submitted          = false;
   errors             : string[] = [];
   messages           : string[] = [];  
@@ -45,15 +48,15 @@ export class PatientRegistrationComponent implements OnInit {
       firstName                     : new FormControl(null,{validators:[Validators.required]}),
       middleName                    : new FormControl(null),
       surName                       : new FormControl(null,{validators:[Validators.required]}),
-      email                       : new FormControl(null,{validators:[Validators.required]}),
       date_of_birth                 : new FormControl(null,{validators:[Validators.required]}),
       gender                        : new FormControl(null,{validators:[Validators.required]}),
-      bloodGroup                          : new FormControl(null,{validators:[Validators.required]}),
-      Address                 : new FormControl(null),
-      medicalConditions              : new FormControl(null),
-      phone                         : new FormControl(null,{validators:[Validators.minLength(9)]}),
-      password                         : new FormControl(null,{validators:[Validators.minLength(8)]}),
-      confirmPassword                         : new FormControl(null,{validators:[Validators.minLength(8)]}),
+      bloodGroup                    : new FormControl(null,{validators:[Validators.required]}),
+      Address                       : new FormControl(null),
+      medicalConditions             : new FormControl(null),
+      phone                         : new FormControl(null,{validators:[Validators.minLength(9),  Validators.maxLength(13)]}),
+      email                         : new FormControl(null,{validators:[Validators.required, Validators.pattern(EMAIL_PATTERN)]}),
+      password                      : new FormControl(null, {validators:[Validators.required, Validators.minLength(8), Validators.maxLength(50)]}),
+      confirmPassword               : new FormControl(null,{validators:[Validators.required, Validators.minLength(8), Validators.maxLength(50)]}),
       
    });
   }

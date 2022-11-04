@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ThemeModule } from '../theme/theme.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ComponentsModule } from '../components/components.module';
 
 import { DoctorRoutingModule, routedComponents } from './doctor-routing.module';
 import { DoctorMenu } from './doctor-menu';
@@ -51,7 +52,8 @@ const NB_MODULES = [
     ThemeModule,
     ...NB_MODULES,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ComponentsModule
   ],
   // exports: [
   //   ...routedComponents
