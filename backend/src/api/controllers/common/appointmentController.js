@@ -131,7 +131,7 @@ function map_appointment(appointment, patient){
         return Math.abs(age.getFullYear() - 1970);
     }
 
-    console.log(appointment)
+    //console.log(appointment)
 
     return {
         id: appointment.id,
