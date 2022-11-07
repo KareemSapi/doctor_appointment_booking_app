@@ -1,35 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {Validators, FormGroup, FormBuilder, FormControl} from '@angular/forms'
+import { Validators, FormGroup, FormBuilder, FormControl} from '@angular/forms'
 import { AppointmentsService } from 'src/app/core/backend/services/appointments.service';
-import { PatientsService } from 'src/app/core/backend/services/patients.service';
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-edit-appointment',
-  templateUrl: './edit-appointment.component.html',
-  styleUrls: ['./edit-appointment.component.scss']
+  selector: 'app-appointment-details',
+  templateUrl: './appointment-details.component.html',
+  styleUrls: ['./appointment-details.component.scss']
 })
-export class EditAppointmentComponent implements OnInit {
+export class AppointmentDetailsComponent implements OnInit {
 
   appointmentForm!: FormGroup;
   data:{} = {};
   submitted: boolean = false;
   message: string = '';
   appointment: any;
-  id: any;
 
   get time() { return this.appointmentForm.get('time'); }
   get gender() { return this.appointmentForm.get('gender'); }
   get symptoms() { return this.appointmentForm.get('symptoms'); }
-  get bloodGroup() { return this.appointmentForm.get('bloodGroup'); }
-  get medicalConditions() { return this.appointmentForm.get('medicalConditions'); }
+  get registrationNumber() { return this.appointmentForm.get('registrationNumber'); }
+  get specialization() { return this.appointmentForm.get('specialization'); }
+  get qualification() { return this.appointmentForm.get('qualification'); }
   get name() { return this.appointmentForm.get('name');}
   get remarks() { return this.appointmentForm.get('remarks')}
   get age() { return this.appointmentForm.get('age'); }
 
   constructor(
-    private patientService: PatientsService,
     private appointmentService: AppointmentsService,
     private router: Router,
     private route: ActivatedRoute,
@@ -38,18 +36,19 @@ export class EditAppointmentComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.id = this.route.snapshot.paramMap.get('id');
-    this.getAppointmentDetails(this.id)
+    let id = this.route.snapshot.paramMap.get('id');
+    this.getAppointmentDetails(id)
     
     this.appointmentForm = new FormGroup({
       name                  : new FormControl({value: null, disabled: true}, {validators:[Validators.required]}),
       age                   : new FormControl({value: null, disabled: true}, {validators:[Validators.required]}),
       time                  : new FormControl({value: null, disabled: true}, {validators:[Validators.required]}),
       gender                : new FormControl({value: null, disabled: true},{validators:[Validators.required]}),
-      bloodGroup            : new FormControl({value: null, disabled: true},{validators:[Validators.required]}),
-      medicalConditions     : new FormControl({value: null, disabled: true},{validators:[Validators.required]}),
+      specialization        : new FormControl({value: null, disabled: true},{validators:[Validators.required]}),
+      qualification         : new FormControl({value: null, disabled: true},{validators:[Validators.required]}),
+      registrationNumber    : new FormControl({value: null, disabled: true},{validators:[Validators.required]}),
       symptoms              : new FormControl({value: null, disabled: true},{validators:[Validators.required]}),
-      remarks               : new FormControl(null, {validators:[Validators.required]}),
+      remarks               : new FormControl({value: null, disabled: true}, {validators:[Validators.required]}),
     });
   }
 
@@ -61,11 +60,11 @@ export class EditAppointmentComponent implements OnInit {
        this.appointmentForm.setValue({
         name                          : `${this.appointment.first_name} ${this.appointment.middle_name} ${this.appointment.last_name}`,
         gender                        : this.appointment.gender,
-        bloodGroup                    : this.appointment.blood_group,
-        medicalConditions             : this.appointment.medical_conditions,
+        specialization                : this.appointment.specialization,
+        registrationNumber            : this.appointment.registration_number,
         remarks                       : this.appointment.remarks,
         symptoms                      : this.appointment.symptoms,
-        //phone                         : this.profile.phone_number,
+        qualification                 : this.appointment.qualification,
         time                          : this.date.transform(this.appointment.time, 'medium'),
         age                           : this.appointment.age
 
@@ -73,22 +72,6 @@ export class EditAppointmentComponent implements OnInit {
      });
   }
 
-  save(): void{
-    this.data = {
-      id: this.id,
-      doctor_remarks: this.appointmentForm.value.remarks
-    }
-    this.submitted = true;
-
-    this.appointmentService.update(this.data)
-      .subscribe((result: any) => {
-        if(!result){
-          return;
-        }
-
-        this.appointmentForm.reset()
-        //return this.router.navigate(['/doctor/appointments'])
-      })
-  }
+  save(): void{}
 
 }

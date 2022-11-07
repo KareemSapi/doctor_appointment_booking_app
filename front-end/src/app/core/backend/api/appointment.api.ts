@@ -36,5 +36,9 @@ export class AppointmentsApi {
   add(data: any): Observable<any> {
     return this.api.post(`${this.apiController}/add`, data)
   }
+
+  update( data: any): Observable<any> {
+    return this.api.put(`${this.apiController}/${data.id}/update`, data)
+  }
   
 }

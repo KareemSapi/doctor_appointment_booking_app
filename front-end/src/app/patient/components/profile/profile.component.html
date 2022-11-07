@@ -40,7 +40,9 @@ autocomplete="off"
     id="middleName"
     placeholder="Middle Name (Optional) "
     formControlName="middleName"
-  >
+    [status]="middleName?.dirty ? (middleName?.invalid  ? 'danger' : 'success') : ''"
+    [attr.aria-invalid]="middleName?.invalid && middleName?.touched ? true : null"
+    />
   </div>
 </div>
 
@@ -120,7 +122,9 @@ autocomplete="off"
       id="Address"
       placeholder="Address"
       formControlName="Address"
-     >
+      [status]="Address?.dirty ? (Address?.invalid  ? 'danger' : 'success') : ''"
+      [attr.aria-invalid]="Address?.invalid && Address?.touched ? true : null"
+    />
   </div>
   <div class="col-sm-6">
       <label for="phone">Mobile Number:</label>
@@ -131,7 +135,13 @@ autocomplete="off"
       id="phone"
       placeholder="Phone Number"
       formControlName="phone"
+      [status]="phone?.dirty ? (phone?.invalid  ? 'danger' : 'success') : ''"
+      [attr.aria-invalid]="phone?.invalid && phone?.touched ? true : null"
       >
+      <app-validation-message label="Phone number" [showMinLength]="phone?.hasError('minlength') && phone?.touched"
+      [showMaxLength]="phone?.hasError('maxlength') && phone?.touched"
+      [minLength]="8"
+      [maxLength]="13"></app-validation-message>
   </div>
 </div>
 
@@ -166,7 +176,9 @@ autocomplete="off"
     id="medicalConditions"
     placeholder="Any medical conditions?... eg diabetes, cancer"
     formControlName="medicalConditions"
-   >
+    [status]="medicalConditions?.dirty ? (medicalConditions?.invalid  ? 'danger' : 'success') : ''"
+    [attr.aria-invalid]="medicalConditions?.invalid && medicalConditions?.touched ? true : null"
+  >
   </div>
 </div>
 

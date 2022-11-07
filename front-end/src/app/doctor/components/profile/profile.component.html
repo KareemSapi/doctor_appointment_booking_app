@@ -44,8 +44,10 @@ autocomplete="off"
     id="middleName"
     placeholder="Middle Name (Optional) "
     formControlName="middleName"
-  >
-  </div>
+    [status]="middleName?.dirty ? (middleName?.invalid  ? 'danger' : 'success') : ''"
+    [attr.aria-invalid]="middleName?.invalid && middleName?.touched ? true : null"
+    />
+ </div>
 </div>
 
 <div class="form-group-group row">
@@ -58,7 +60,11 @@ autocomplete="off"
     id="surName"
     placeholder="Last Name"
     formControlName="surName"
-  >
+    [status]="surName?.dirty ? (surName?.invalid  ? 'danger' : 'success') : ''"
+    [attr.aria-invalid]="surName?.invalid && surName?.touched ? true : null"
+  />
+  <app-validation-message label="Last Name" 
+  [showRequired]="surName?.errors?.['required'] && surName?.touched"></app-validation-message>
   </div>
 </div>
 
@@ -73,7 +79,11 @@ autocomplete="off"
       fullWidth
       placeholder="Date of Birth"
       formControlName="date_of_birth"
-  >
+      [status]="date_of_birth?.dirty ? (date_of_birth?.invalid  ? 'danger' : 'success') : ''"
+      [attr.aria-invalid]="date_of_birth?.invalid && date_of_birth?.touched ? true : null"
+    />
+    <app-validation-message label="Date of Birth" 
+    [showRequired]="date_of_birth?.errors?.['required'] && date_of_birth?.touched"></app-validation-message>
  </div>
 
   <div class="col-sm-6">
@@ -83,10 +93,14 @@ autocomplete="off"
       fullWidth
       placeholder="Select gender"
       formControlName="gender"
+      [status]="gender?.dirty ? (gender?.invalid  ? 'danger' : 'success') : ''"
+      [attr.aria-invalid]="gender?.invalid && gender?.touched ? true : null"
       >
     <nb-option value="Male">male</nb-option>
     <nb-option value="Female">female</nb-option>
   </nb-select>
+  <app-validation-message label="Gender" 
+  [showRequired]="gender?.errors?.['required'] && gender?.touched"></app-validation-message>
     </div>
   </div>
 
@@ -124,7 +138,9 @@ autocomplete="off"
       id="Address"
       placeholder="Address"
       formControlName="Address"
-     >
+      [status]="Address?.dirty ? (Address?.invalid  ? 'danger' : 'success') : ''"
+      [attr.aria-invalid]="Address?.invalid && Address?.touched ? true : null"
+    />
   </div>
   <div class="col-sm-6">
     <label for="phone">Mobile Number:</label>
@@ -135,7 +151,13 @@ autocomplete="off"
       id="phone"
       placeholder="Phone Number"
       formControlName="phone"
-      >
+      [status]="phone?.dirty ? (phone?.invalid  ? 'danger' : 'success') : ''"
+      [attr.aria-invalid]="phone?.invalid && phone?.touched ? true : null"
+      />
+      <app-validation-message label="Phone number" [showMinLength]="phone?.hasError('minlength') && phone?.touched"
+      [showMaxLength]="phone?.hasError('maxlength') && phone?.touched"
+      [minLength]="8"
+      [maxLength]="13"></app-validation-message>
   </div>
 </div>
 
@@ -149,7 +171,11 @@ autocomplete="off"
       id="registrationNumber"
       placeholder="registrationNumber"
       formControlName="registrationNumber"
-     >
+      [status]="registrationNumber?.dirty ? (registrationNumber?.invalid  ? 'danger' : 'success') : ''"
+      [attr.aria-invalid]="registrationNumber?.invalid && registrationNumber?.touched ? true : null"
+    />
+    <app-validation-message label="Registration Number" 
+    [showRequired]="registrationNumber?.errors?.['required'] && registrationNumber?.touched"></app-validation-message>
     </div>
   </div>
 
@@ -163,7 +189,11 @@ autocomplete="off"
       id="qualification"
       placeholder="qualification"
       formControlName="qualification"
-     >
+      [status]="qualification?.dirty ? (qualification?.invalid  ? 'danger' : 'success') : ''"
+      [attr.aria-invalid]="qualification?.invalid && qualification?.touched ? true : null"
+    />
+    <app-validation-message label="Qualification" 
+    [showRequired]="qualification?.errors?.['required'] && qualification?.touched"></app-validation-message>
     </div>
   </div>
 
@@ -178,7 +208,11 @@ autocomplete="off"
     id="specialization"
     placeholder="specialization"
     formControlName="specialization"
-   >
+    [status]="specialization?.dirty ? (specialization?.invalid  ? 'danger' : 'success') : ''"
+    [attr.aria-invalid]="specialization?.invalid && specialization?.touched ? true : null"
+  />
+  <app-validation-message label="Specialization" 
+  [showRequired]="specialization?.errors?.['required'] && specialization?.touched"></app-validation-message>
   </div>
 </div>
 

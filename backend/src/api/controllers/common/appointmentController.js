@@ -90,11 +90,21 @@ exports.get_appointments = async (req, res) => {
     const id = req.params.id
 
     try {
-        const APPOINTMENT = await Appointment.findOne({where: {id: id}})
-        //console.log(APPOINTMENT)
-        const PATIENT = await Patient.findOne({where: {id: APPOINTMENT.dataValues.PatientId}})
 
-        !APPOINTMENT && !PATIENT? {}: res.status(200).json(map_appointment(APPOINTMENT, PATIENT));
+        if(req.user.is_patient){
+            const APPOINTMENT = await Appointment.findOne({where: {id: id}})
+  
+            const DOCTOR = await Doctor.findOne({where: {id: APPOINTMENT.dataValues.DoctorId}})
+    
+            !APPOINTMENT && !DOCTOR? {}: res.status(200).json(map_appointment(APPOINTMENT, DOCTOR));
+            
+        }else{
+            const APPOINTMENT = await Appointment.findOne({where: {id: id}})
+        
+            const PATIENT = await Patient.findOne({where: {id: APPOINTMENT.dataValues.PatientId}})
+    
+            !APPOINTMENT && !PATIENT? {}: res.status(200).json(map_appointment(APPOINTMENT, PATIENT));
+        }
 
     } catch (error) {
         logger.error(error);
@@ -103,15 +113,18 @@ exports.get_appointments = async (req, res) => {
 }
 
 /**
- * @method: confirm appointments
+ * @method: update appointments
  */
-exports.confirm_appointment = async (req, res) => {
-    const appointmentId = req.body.id
+exports.update_appointment = async (req, res) => {
+    const appointmentId = req.params.id
 
     try {
        const APPOINTMENT = await Appointment.findOne({where: {id: appointmentId}})
 
-       APPOINTMENT.update({is_active: false})
+       APPOINTMENT.update({
+        is_active: false,
+        doctor_remarks: req.body.doctor_remarks,
+    })
 
        return res.sendStatus(200)
 
@@ -121,8 +134,8 @@ exports.confirm_appointment = async (req, res) => {
     }
 }
 
-//map appointment data & patient data
-function map_appointment(appointment, patient){
+//map appointment data & user data
+function map_appointment(appointment, user){
 
     function getAge(dob){
         var diff = Date.now() - Date.parse(dob);
@@ -135,13 +148,16 @@ function map_appointment(appointment, patient){
 
     return {
         id: appointment.id,
-        first_name: patient.first_name,
-        middle_name: patient.middle_name,
-        last_name: patient.last_name,
-        gender: patient.gender,
-        blood_group: patient.blood_group,
-        medical_conditions: patient.medical_conditions,
-        age: getAge(patient.date_of_birth),
+        first_name: user.first_name,
+        middle_name: user.middle_name,
+        last_name: user.last_name,
+        gender: user.gender,
+        blood_group: user.blood_group,
+        medical_conditions: user.medical_conditions,
+        registration_number: user.registration_number,
+        specialization: user.specialization,
+        qualification: user.qualification,
+        age: getAge(user.date_of_birth),
         time: appointment.time,
         remarks: appointment.doctor_remarks,
         symptoms: appointment.patient_symptoms,

@@ -99,14 +99,14 @@ const { saltHashPassword } = require('../../../utils/cipher');
         if(!PATIENT){ return res.status(400).json({message: 'Something went wrong!!!'})}
 
         PATIENT.set({
-            first_name: req.body.first_name,
+            // first_name: req.body.first_name,
             middle_name: req.body.middle_name,
-            last_name: req.body.last_name,
+            // last_name: req.body.last_name,
             phone_number: req.body.phone_number,
-            date_of_birth: req.body.date_of_birth,
-            gender: req.body.gender,
+            // date_of_birth: req.body.date_of_birth,
+            // gender: req.body.gender,
             address: req.body.address,
-            blood_group: req.body.blood_group,
+            // blood_group: req.body.blood_group,
             medical_conditions: req.body.medical_conditions,
         })
 

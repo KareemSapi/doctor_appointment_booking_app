@@ -21,4 +21,8 @@ export class AppointmentsService {
     return this.api.get(id);
   }
 
+  update(data: any): Observable<any> {
+    return this.api.update(data);
+  }
+
 }

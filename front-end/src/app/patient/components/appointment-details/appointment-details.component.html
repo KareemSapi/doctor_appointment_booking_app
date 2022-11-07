@@ -1,3 +1,5 @@
+
+
 <div class="row">
     <div class="col-lg-8 offset-md-2">
       <nb-card>
@@ -26,20 +28,7 @@
        type="text" 
        id="name"
        formControlName="name"
-       placeholder="Name of Patient"
-      />
-    </div>
-  </div>
-  <div class="row form-group-group">
-    <div class="col-sm-6">
-      <label for="age">Age:</label>
-      <input
-       nbInput
-       fullWidth 
-       type="text" 
-       id="age"
-       formControlName="age"
-       placeholder="Age of Patient"
+       placeholder="Name of Doctor"
       />
     </div>
   </div>
@@ -51,33 +40,59 @@
           nbInput
           id="gender"
           fullWidth
-          placeholder="Select gender"
+          placeholder="Gender"
           formControlName="gender"
         />
     </div>
     <div class="col-sm-6">
-        <label for="bloodGroup">Blood Group:</label>
+        <label for="age">Age:</label>
         <input
-          type="text"
-          nbInput
-          id="bloodGroup"
-          fullWidth
-          placeholder="Blood Group"
-          formControlName="bloodGroup"
+         nbInput
+         fullWidth 
+         type="text" 
+         id="age"
+         formControlName="age"
+         placeholder="Age"
         />
-    </div>
+      </div>
 </div>
+  <div class="row form-group-group">
+    <div class="col-sm-12">
+    <label for="registrationNumber">Doctor's Registration Number:</label>
+    <input
+     nbInput 
+     fullWidth
+     type="text" 
+     id="registrationNumber"
+     formControlName="registrationNumber"
+     placeholder="Registration Number"
+    />
+    </div>
+  </div>
+<div class="row form-group-group">
+    <div class="col-sm-12">
+      <label for="qualification">Qualification:</label>
+      <input
+       nbInput
+       fullWidth 
+       type="text" 
+       id="qualification"
+       formControlName="qualification"
+       placeholder="Qualification"
+      />
+    </div>
+  </div>
 
 <div class="form-group-group row">
  <div class="col-sm-12">
-  <label for="medicalConditions">Medical Conditions:</label>
+  <label for="specialization">Specialization:</label>
   <input
     type="text"
     nbInput
     fullWidth
-    id="medicalConditions"
-    placeholder="Any medical conditions?"
-    formControlName="medicalConditions"
+    id="specialization"
+    placeholder="Specialization"
+    formControlName="specialization"
    >
    </div>
 </div>
@@ -91,7 +106,7 @@
        type="text" 
        id="time"
        formControlName="time"
-       placeholder="Pick appointment date"
+       placeholder="Appointment date"
        />
     </div>
 </div>
@@ -118,24 +133,21 @@
       id="remarks"
       placeholder="Doctor remarks"
       formControlName="remarks"
-      [status]="remarks?.dirty ? (remarks?.invalid  ? 'danger' : 'success') : ''"
-      [attr.aria-invalid]="remarks?.invalid && remarks?.touched ? true : null"
      ></textarea>
-     <app-validation-message label="Remarks" 
-     [showRequired]="remarks?.errors?.['required'] && remarks?.touched"></app-validation-message>
     </div>
 </div>
-<button
+<!-- <button
     nbButton
     class="btn btn-primary btn-sm"
     status="primary"
     style="padding-left: 2.5rem; padding-right: 2.5rem;"
     type="submit"
     [disabled] = "submitted || appointmentForm.invalid"
->Submit</button>
+>Submit</button> -->
 </form>
 </nb-card-body>
 </nb-card>
 </div>
 </div>
+
 

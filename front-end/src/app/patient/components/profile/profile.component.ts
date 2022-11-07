@@ -41,7 +41,6 @@ export class ProfileComponent implements OnInit {
    get surName() { return this.profileForm.get('surName'); }
    get date_of_birth() { return this.profileForm.get('date_of_birth'); }
    get gender() { return this.profileForm.get('gender'); }
-  //  get country() { return this.profileForm.get('country'); }
    get bloodGroup() { return this.profileForm.get('bloodGroup'); }
    get Address() { return this.profileForm.get('Address'); }
    get phone() { return this.profileForm.get('phone'); }
@@ -62,14 +61,14 @@ export class ProfileComponent implements OnInit {
   this.isPostTextRequired && postTextValidators.push(Validators.required);
 
   this.profileForm = new FormGroup({
-    firstName                     : new FormControl(null,{validators:[Validators.required]}),
+    firstName                     : new FormControl({value: null, disabled: true},{validators:[Validators.required]}),
     middleName                    : new FormControl(null),
-    surName                       : new FormControl(null,{validators:[Validators.required]}),
-    date_of_birth                 : new FormControl(null,{validators:[Validators.required]}),
-    gender                        : new FormControl(null,{validators:[Validators.required]}),
-    bloodGroup                    : new FormControl(null,{validators:[Validators.required]}),
-    Address                       : new FormControl(null,{validators:[Validators.required]}),
-    medicalConditions             : new FormControl(null,{validators:[Validators.required]}),
+    surName                       : new FormControl({value: null, disabled: true},{validators:[Validators.required]}),
+    date_of_birth                 : new FormControl({value: null, disabled: true},{validators:[Validators.required]}),
+    gender                        : new FormControl({value: null, disabled: true},{validators:[Validators.required]}),
+    bloodGroup                    : new FormControl({value: null, disabled: true},{validators:[Validators.required]}),
+    Address                       : new FormControl(null),
+    medicalConditions             : new FormControl(null),
     phone                         : new FormControl(null,{validators:[Validators.minLength(9)]}),
     
  });

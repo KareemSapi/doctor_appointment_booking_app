@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { ThemeModule } from '../theme/theme.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ComponentsModule } from '../components/components.module';
 
 import { PatientMenu } from './patient-menu';
 
@@ -23,6 +24,7 @@ import {
   NbCardModule,
   NbListModule
 } from '@nebular/theme';
+
 
 const NB_MODULES = [
   NbLayoutModule,
@@ -51,13 +53,15 @@ const NB_MODULES = [
     ...NB_MODULES,
     ThemeModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ComponentsModule
   ],
   // exports: [
   //   routedComponents
   //  ],
   providers: [
-    PatientMenu
+    PatientMenu,
+    DatePipe
   ]
 })
 export class PatientModule { }

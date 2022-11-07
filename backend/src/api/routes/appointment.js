@@ -26,7 +26,7 @@ router.get('/all', appointmentController.get_appointments);
 //route to get appointment by id
 router.get('/:id/details', appointmentController.get_appointment_by_id)
 
-router.put('/confirm', appointmentController.confirm_appointment);
+router.put('/:id/update', validator.validate("update_appointment"), appointmentController.update_appointment);
 
 
 module.exports = router;
