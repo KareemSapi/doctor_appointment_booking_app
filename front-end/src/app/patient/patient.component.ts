@@ -10,7 +10,8 @@ import { map } from 'rxjs/operators';
   templateUrl: './patient.component.html',
   styleUrls: ['./patient.component.scss']
 })
-export class PatientComponent implements OnDestroy, OnInit {
+export class PatientComponent implements OnDestroy //, OnInit 
+{
 
   menu!: NbMenuItem[];
   alive: boolean = true;
@@ -28,9 +29,9 @@ export class PatientComponent implements OnDestroy, OnInit {
         });
     }
 
-    ngOnInit(): void {
+    // ngOnInit(): void {
         
-    }
+    // }
 
     initMenu(){
 

@@ -5,11 +5,12 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './patient-layout.component.html',
   styleUrls: ['./patient-layout.component.scss']
 })
-export class PatientLayoutComponent implements OnInit {
+export class PatientLayoutComponent //implements OnInit 
+{
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  // ngOnInit(): void {
+  // }
 
 }
