@@ -22,10 +22,15 @@ require('./passport');
 
 const app = express();
 
-app.use(cors())
+let corsOptions = {
+    origin: '*'
+  }
+
+app.use(cors(corsOptions))
 app.use(compression())
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
+app.disable("x-powered-by");
 // seedService
 
 function logErrors(err, req, res, next) {
