@@ -11,7 +11,6 @@
 
  const Sequelize = require('sequelize');
  const sequelize = require('../../db/postgreClient');
- const User = require('./Users');
 
  const Doctor = sequelize.define('Doctor', {
 

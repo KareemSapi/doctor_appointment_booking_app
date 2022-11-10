@@ -11,7 +11,6 @@
 
  const logger = require('../../../utils/logger');
  const Users = require('../../models/Users');
- //const Session = require('../../models/Session');
  const config = require('config');
  const cipher = require('../../../utils/cipher');
  const passport = require('passport');
@@ -43,7 +42,6 @@
       }
 
      const  passwordHash = cipher.saltHashPassword(req.body.password, req.body.username);
-      //console.log(passwordHash);
 
       await Users.create({
           username: req.body.username,
@@ -77,11 +75,6 @@
           } 
 
             const accessToken = jwt_service.sign_jwt(user, "1w") //create access token
-         
-            //const refreshToken = jwt_service.sign_jwt({id: user.id}, "1y") //create refresh token
-
-            //save_refresh_token(refreshToken, user.id) //save refresh token
-
 
         return res.status(200).json({ user, accessToken, message: `Login succesful` });
     });
@@ -93,26 +86,7 @@
    * @method: user logout
    */
  exports.logout = async (req, res, next) => {
-  //invalidate refresh token in storage
-  // const { refreshToken } = req.body; console.log(refreshToken)
-  
-  // if(refreshToken){
-  //   try {
-  //     const session = await Session.findOne({where: {token: refreshToken}})
-  
-  //     if(!session){ return res.status(401).json({message: 'Something went wrong!!!'})}
-  
-  //     await session.destroy({force: true});
-  
-  //     return res.sendStatus(204)
-  
-  //   } catch (error) {
-  //     logger.error(error);
-  //   }
-  // }else{
-  //   return res.status(400).json({message: `Something went wrong!!!`});
-  // }
-
+ 
   return res.status(200).json({message: `user logged out`})
 
  }

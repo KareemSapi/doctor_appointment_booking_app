@@ -40,13 +40,12 @@ exports.get_user_by_id = async (req,res) => {
  */
 exports.email_verification = (req,res) => {
     const token = req.body.token;
-    //console.log(token)
 
     if(token){ 
 
         try {
             
-            jwt.verify(token, config.get('auth.jwt.secret'), async function(err, decodedToken){ //console.log(decodedToken)
+            jwt.verify(token, config.get('auth.jwt.secret'), async function(err, decodedToken){ 
                 if(err){ return res.status(403).json(err)}
     
                 try {
@@ -94,7 +93,7 @@ exports.update_password = async (req, res) => {
 
         const newPasswordHash = cipher.sha512(new_password, USER.username);
 
-        const Results = await User.update({password: newPasswordHash}, {where: {id: USER.id}})
+        await User.update({password: newPasswordHash}, {where: {id: USER.id}})
         
         return res.status(201).json({message: `password succesfully updated`})
 
@@ -108,7 +107,7 @@ exports.update_password = async (req, res) => {
  * @method: re send verification email.
  */
 exports.re_send_verification_email = async (req, res) => {
-    const { id, token } = req.body;
+    const id = req.body.id;
 
     try {
         const USER = await User.findOne({where: {id: id}});
@@ -116,7 +115,6 @@ exports.re_send_verification_email = async (req, res) => {
         if(!USER){ return res.status(400).json({message:`Something went wrong!!!`})}
 
         const token = sign_jwt({id: USER.id, username: USER.username}, "30m")
-        //console.log(token)
 
         send_verification_email(USER.username, "", token)
 
@@ -158,12 +156,10 @@ exports.delete_user = async (req, res) => {
 /**
  * @method: Get user by access token
  */
- exports.get_current_user = async (req,res) => { //console.log(req.user)
-    const id = req.user.id;
+ exports.get_current_user = async (req,res) => { 
 
     try {
         const USER = await User.findOne({where: {id: req.user.id}});
-        //console.log(USER)
 
         if(!USER){ return res.status(400).json({message: 'Something went wrong!!!'})}
 
@@ -175,7 +171,7 @@ exports.delete_user = async (req, res) => {
 }
 
 function map_user(user){
-    return user = {
+    return  {
         id: user.id,
         username: user.username,
         is_verified: user.is_verified,

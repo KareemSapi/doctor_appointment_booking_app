@@ -85,16 +85,4 @@ User.hasMany(Appointment, {
     onUpdate: 'CASCADE'
 });
 
-// Patient.hasMany(Appointment, {
-//     foreignKey: 'PatientId',
-//     onDelete: 'CASCADE',
-//     onUpdate: 'CASCADE'
-// });
-
-// Doctor.hasMany(Appointment, {
-//     foreignKey: 'DoctorId',
-//     onDelete: 'CASCADE',
-//     onUpdate: 'CASCADE'
-// });
-
 module.exports = User;

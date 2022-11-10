@@ -12,10 +12,8 @@
  const logger = require('../../../utils/logger');
  const User = require('../../models/Users');
  const Patient = require('../../models/Patient');
-//  const config = require('config');
-//  const passport = require('passport');
  const { validationResult } = require('express-validator');
-const { saltHashPassword } = require('../../../utils/cipher');
+ const { saltHashPassword } = require('../../../utils/cipher');
 
 /**
  * @method: register patient
@@ -64,13 +62,12 @@ const { saltHashPassword } = require('../../../utils/cipher');
     }
  }
 
- exports.get_current_patient = async (req, res) => { //console.log(req.user)
+ exports.get_current_patient = async (req, res) => { 
     try {
 
         if(!req.user.is_patient) return res.sendStatus(403)
 
         const PATIENT = await Patient.findOne({where: {UserId: req.user.id}})
-        //console.log(PATIENT)
 
         if(!PATIENT) return {};
 
@@ -99,14 +96,9 @@ const { saltHashPassword } = require('../../../utils/cipher');
         if(!PATIENT){ return res.status(400).json({message: 'Something went wrong!!!'})}
 
         PATIENT.set({
-            // first_name: req.body.first_name,
             middle_name: req.body.middle_name,
-            // last_name: req.body.last_name,
             phone_number: req.body.phone_number,
-            // date_of_birth: req.body.date_of_birth,
-            // gender: req.body.gender,
             address: req.body.address,
-            // blood_group: req.body.blood_group,
             medical_conditions: req.body.medical_conditions,
         })
 

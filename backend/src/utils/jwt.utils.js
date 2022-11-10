@@ -32,7 +32,6 @@ exports.sign_jwt = function(payload, expiresIn){
 
     } catch (error) {
 
-        //throw new Error("token error");
         logger.error(error);
     }
 }
