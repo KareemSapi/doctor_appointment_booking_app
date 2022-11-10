@@ -10,7 +10,6 @@
  */
 
  const logger = require('../../../utils/logger');
- const User = require('../../models/Users');
  const Appointment = require('../../models/Appointment');
  const Patient = require('../../models/Patient')
  const Doctor = require('../../models/Doctor')
@@ -28,11 +27,8 @@ exports.create_appointment = async (req, res) => {
 
     const id = req.user.id;
 
-    //console.log(id, req.body)
-
     try {
         const PATIENT = await Patient.findOne({where: {UserId: id}})
-        //console.log(PATIENT);
 
         if(!req.user.is_patient){ return res.sendStatus(403) }
 
@@ -40,7 +36,7 @@ exports.create_appointment = async (req, res) => {
             time: req.body.time,
             DoctorId: req.body.doctorId,
             PatientId: PATIENT.dataValues.id,
-            patient_feedback: req.body.patient_symptoms,
+            patient_symptoms: req.body.patient_symptoms,
             createdBy: id
         });
 
@@ -57,7 +53,6 @@ exports.create_appointment = async (req, res) => {
  */
 exports.get_appointments = async (req, res) => {
     const id = req.user.id
-    //console.log(id, req.user)
 
     let APPOINTMENTS
 
@@ -65,13 +60,13 @@ exports.get_appointments = async (req, res) => {
         if(req.user.is_patient){
 
             APPOINTMENTS = await Appointment.findAll({where: {createdBy: id}})
-            //console.log(APPOINTMENTS)
+           
 
         }else{
             const DOCTOR = await Doctor.findOne({where: {UserId: id}})
 
             APPOINTMENTS = await Appointment.findAll({where: {DoctorId: DOCTOR.dataValues.id}})
-            //console.log(APPOINTMENTS)
+
         }
        
 
@@ -95,15 +90,23 @@ exports.get_appointments = async (req, res) => {
             const APPOINTMENT = await Appointment.findOne({where: {id: id}})
   
             const DOCTOR = await Doctor.findOne({where: {id: APPOINTMENT.dataValues.DoctorId}})
-    
-            !APPOINTMENT && !DOCTOR? {}: res.status(200).json(map_appointment(APPOINTMENT, DOCTOR));
+
+            if(!APPOINTMENT && !DOCTOR){
+                return res.send({})
+            }else{
+                return  res.status(200).json(map_appointment(APPOINTMENT, DOCTOR))
+            }
             
         }else{
             const APPOINTMENT = await Appointment.findOne({where: {id: id}})
         
             const PATIENT = await Patient.findOne({where: {id: APPOINTMENT.dataValues.PatientId}})
-    
-            !APPOINTMENT && !PATIENT? {}: res.status(200).json(map_appointment(APPOINTMENT, PATIENT));
+
+            if(!APPOINTMENT && !PATIENT){
+                return res.send({})
+            }else{
+                return  res.status(200).json(map_appointment(APPOINTMENT,PATIENT))
+            }
         }
 
     } catch (error) {
@@ -138,13 +141,11 @@ exports.update_appointment = async (req, res) => {
 function map_appointment(appointment, user){
 
     function getAge(dob){
-        var diff = Date.now() - Date.parse(dob);
-        var age = new Date(diff)
+        let diff = Date.now() - Date.parse(dob);
+        let age = new Date(diff)
 
         return Math.abs(age.getFullYear() - 1970);
     }
-
-    //console.log(appointment)
 
     return {
         id: appointment.id,
