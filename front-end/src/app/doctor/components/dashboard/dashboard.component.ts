@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
         this.appointments = []
       }else{
         this.appointments = data
-        this.appointments.slice(0,2)
+        //this.appointments.slice(0,2)
         this.appointments.reverse()
         //console.log(this.appointments)
       }

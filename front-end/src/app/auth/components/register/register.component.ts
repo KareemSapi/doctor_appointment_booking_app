@@ -103,15 +103,9 @@ export class RegisterComponent implements OnInit {
 
       return this.router.navigate(['/auth/login']);
 
-      // const redirect = result.getRedirect();
-      // if (redirect) {
-      //   setTimeout(() => {
-          
-      //   }, this.redirectDelay);
-      // }
-      this.cd.detectChanges();
+      // this.cd.detectChanges();
     }, error => {
-      //console.log(error);
+      // console.log(error);
     });
   }
 
