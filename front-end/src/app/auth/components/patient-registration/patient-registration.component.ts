@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { Router} from '@angular/router';
 import { PatientsService } from 'src/app/core/backend/services/patients.service';
 import { EMAIL_PATTERN } from '../constants';
 
@@ -12,8 +11,8 @@ import { EMAIL_PATTERN } from '../constants';
 })
 export class PatientRegistrationComponent implements OnInit {
 
-  minLength           : number = 8 //this.getConfigValue('forms.validation.password.minLength');
-  maxLength           : number = 50 //this.getConfigValue('forms.validation.password.maxLength');
+  minLength           : number = 8 
+  maxLength           : number = 50 
   submitted          = false;
   errors             : string[] = [];
   messages           : string[] = [];  
@@ -89,10 +88,11 @@ export class PatientRegistrationComponent implements OnInit {
     this.patientService.add(data)
      .subscribe(res => {
       if(!res){
+        
         setTimeout(() => {
          this.loading = false 
         }, 3000);
-        return;
+
       }else{
         this.registrationForm.reset();
         this.router.navigate(['/auth/login'])

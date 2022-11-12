@@ -1,6 +1,5 @@
 
 import { Injectable } from '@angular/core';
-import { HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { HttpService } from './http.service';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -50,9 +49,9 @@ searchDoctors(term: string): Observable<Doctor[]> {
   );
 }
 
-  /** Log a HeroService message with the MessageService */
+  /** Log a message with the MessageService */
   private log(message: string) {
-    //this.messageService.add(`HeroService: ${message}`);
+    //this.messageService.add(` ${message}`);
   }
 
   /**

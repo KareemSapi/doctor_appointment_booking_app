@@ -1,7 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { HttpRequest } from '@angular/common/http';
+import { HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthRoutingModule, routedComponents } from './auth-routing.module';
 import { CoreModule } from '../core/core.module';
 import {

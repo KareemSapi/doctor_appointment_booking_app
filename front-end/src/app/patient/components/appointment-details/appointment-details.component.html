@@ -5,9 +5,6 @@
       <nb-card>
         <nb-card-header>
             <nav class="navigation">
-              <!-- <a (click)="back()" class="link" aria-label="Back">
-                <i class="icon  nb-arrow-thin-left"></i>
-              </a> -->
              <h1 class="text-align-center"> Appointment Details</h1>
           </nav>
         </nb-card-header>
@@ -15,7 +12,6 @@
         <nb-card-body>
   <form
   [formGroup]="appointmentForm"
-  (submit)="save()" 
   aria-labelledby="title"
   autocomplete="off"
   >
@@ -136,14 +132,6 @@
      ></textarea>
     </div>
 </div>
-<!-- <button
-    nbButton
-    class="btn btn-primary btn-sm"
-    status="primary"
-    style="padding-left: 2.5rem; padding-right: 2.5rem;"
-    type="submit"
-    [disabled] = "submitted || appointmentForm.invalid"
->Submit</button> -->
 </form>
 </nb-card-body>
 </nb-card>

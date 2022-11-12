@@ -1,6 +1,5 @@
 
 import { Injectable } from '@angular/core';
-import { HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HttpService } from './http.service';
 import { map } from 'rxjs/operators';
@@ -14,7 +13,6 @@ export class AppointmentsApi {
   getCurrent(): Observable<any> {
     return this.api.get(`${this.apiController}/current`)
       .pipe(map(data => {
-        //const picture = `${this.api.apiUrl}/${this.apiController}/${data.id}/photo`;
         return { ...data };
       }));
   }

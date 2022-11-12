@@ -10,8 +10,6 @@ export class SearchService {
   private searchTerm = new BehaviorSubject('')
   currentTerm  = this.searchTerm.asObservable()
 
-  constructor() { }
-
   updateTerms(text: string) {
     this.searchTerm.next(text)
   }

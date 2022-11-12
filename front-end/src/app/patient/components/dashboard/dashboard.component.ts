@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { DoctorsService } from 'src/app/core/backend/services/doctors.service';
 import { Doctor } from 'src/app/core/interfaces/doctor';

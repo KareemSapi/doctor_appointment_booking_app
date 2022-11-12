@@ -1,10 +1,8 @@
 import { NbMenuItem } from '@nebular/theme';
  import { Observable, of } from 'rxjs';
  import { Injectable } from '@angular/core';
- //import { ROLES } from '../@auth/roles';
- //import { NbRoleProvider } from '@nebular/security';
- import { map } from 'rxjs/operators';
- 
+
+
  @Injectable()
  export class DoctorMenu {
   //  constructor(private roleProvider: NbRoleProvider) {}
@@ -32,7 +30,7 @@ import { NbMenuItem } from '@nebular/theme';
        {
          title: 'Appointments',
          icon: 'list-outline',
-         link: '/doctor/appointments/',
+         link: '/doctor/appointments',
        },
 
        {

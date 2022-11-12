@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
   NB_AUTH_OPTIONS,
@@ -8,7 +8,6 @@ import {
   NbAuthResult,
 } from '@nebular/auth';
 import { getDeepFromObject } from '../../helpers';
-import { NbThemeService } from '@nebular/theme';
 import { EMAIL_PATTERN } from '../constants'
 
 
@@ -20,8 +19,8 @@ import { EMAIL_PATTERN } from '../constants'
 })
 export class RegisterComponent implements OnInit {
 
-  minLength           : number = 8 //this.getConfigValue('forms.validation.password.minLength');
-  maxLength           : number = 50 //this.getConfigValue('forms.validation.password.maxLength');
+  minLength           : number = 8 
+  maxLength           : number = 50 
   isOrgNameRequired   : boolean = this.getConfigValue('forms.validation.orgName.required');
   isGivenNameRequired : boolean = this.getConfigValue('forms.validation.givenName.required');
   isFamilyNameRequired: boolean = this.getConfigValue('forms.validation.familyName.required');
@@ -60,7 +59,7 @@ export class RegisterComponent implements OnInit {
     })
   }
 
-    /*
+  /*
     @method : keydown function. 
   */
     keyDownFunction(event: any){
@@ -103,9 +102,6 @@ export class RegisterComponent implements OnInit {
 
       return this.router.navigate(['/auth/login']);
 
-      // this.cd.detectChanges();
-    }, error => {
-      // console.log(error);
     });
   }
 

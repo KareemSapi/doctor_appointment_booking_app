@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Validators, FormGroup, FormBuilder, FormControl} from '@angular/forms'
+import { Validators, FormGroup, FormControl} from '@angular/forms'
 import { AppointmentsService } from 'src/app/core/backend/services/appointments.service';
 import { DatePipe } from '@angular/common';
 
@@ -71,7 +71,5 @@ export class AppointmentDetailsComponent implements OnInit {
        });
      });
   }
-
-  save(): void{}
 
 }

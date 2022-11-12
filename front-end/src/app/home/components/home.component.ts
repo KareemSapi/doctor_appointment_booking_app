@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NbAuthService, NbAuthToken, decodeJwtPayload } from '@nebular/auth';
 import { Router } from '@angular/router';
-//import { verify } from 'jsonwebtoken';
 
 @Component({
   selector: 'app-home',
@@ -28,7 +27,7 @@ export class HomeComponent implements OnInit {
             .subscribe((result: NbAuthToken) => {
               this.token = result.getValue()
               this.payload = decodeJwtPayload(this.token)
-              //console.log(this.payload)
+
               return this.payload.is_patient? this.router.navigate(['/patient']): this.router.navigate(['/doctor']);
             })
         }

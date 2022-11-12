@@ -1,17 +1,16 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { NbTokenService } from '@nebular/auth';
 import { takeWhile } from 'rxjs/operators';
 import { PatientMenu } from './patient-menu';
 import { NbMenuItem } from '@nebular/theme';
-import { map } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-patient',
   templateUrl: './patient.component.html',
   styleUrls: ['./patient.component.scss']
 })
-export class PatientComponent implements OnDestroy //, OnInit 
-{
+export class PatientComponent implements OnDestroy {
 
   menu!: NbMenuItem[];
   alive: boolean = true;
@@ -28,10 +27,6 @@ export class PatientComponent implements OnDestroy //, OnInit
           this.initMenu();
         });
     }
-
-    // ngOnInit(): void {
-        
-    // }
 
     initMenu(){
 

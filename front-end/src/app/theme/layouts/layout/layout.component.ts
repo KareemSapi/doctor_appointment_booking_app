@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,16 +6,11 @@ import { Router } from '@angular/router';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent //implements OnInit 
-{
+export class LayoutComponent {
 
   constructor(
     private router: Router
   ) { }
-
-  // ngOnInit(): void {
-   
-  // }
 
   doctor(): void{
     this.router.navigate(['/auth/register'])

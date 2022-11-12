@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { AppointmentsService } from 'src/app/core/backend/services/appointments.service';
 import { Router } from '@angular/router';
 

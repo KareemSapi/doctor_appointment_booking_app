@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DoctorsService } from 'src/app/core/backend/services/doctors.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import {Validators, FormGroup, FormBuilder, FormControl} from '@angular/forms'
+import {Validators, FormGroup, FormControl} from '@angular/forms'
 import { AppointmentsService } from 'src/app/core/backend/services/appointments.service';
 
 @Component({
@@ -53,15 +53,11 @@ export class CreateAppointmentComponent implements OnInit {
        //console.log(this.profile)
        this.appointmentForm.setValue({
         name                          : `${this.profile.first_name} ${this.profile.middle_name} ${this.profile.last_name}`,
-        //middleName                    : this.profile.middle_name,
-        //surName                       : this.profile.last_name,
         //date_of_birth                 : this.profile.date_of_birth,
         //gender                        : this.profile.gender,
         specialization                : this.profile.specialization,
         qualification                 : this.profile.qualification,
         registrationNumber            : this.profile.registration_number,
-        //Address                       : this.profile.address,
-        //phone                         : this.profile.phone_number,
         time                          : null,
         symptoms                      : null,
        });

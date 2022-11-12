@@ -3,7 +3,6 @@ import { NbTokenService } from '@nebular/auth';
 import { takeWhile } from 'rxjs/operators';
 import { DoctorMenu } from './doctor-menu';
 import { NbMenuItem } from '@nebular/theme';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-doctor',

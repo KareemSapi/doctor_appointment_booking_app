@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {Validators, FormGroup, FormBuilder, FormControl} from '@angular/forms'
+import {Validators, FormGroup, FormControl} from '@angular/forms'
 import { AppointmentsService } from 'src/app/core/backend/services/appointments.service';
 import { PatientsService } from 'src/app/core/backend/services/patients.service';
 import { DatePipe } from '@angular/common';
@@ -87,7 +87,7 @@ export class EditAppointmentComponent implements OnInit {
         }
 
         this.appointmentForm.reset()
-        //return this.router.navigate(['/doctor/appointments'])
+        this.router.navigate(['doctor/appointments'])
       })
   }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NbAuthService, NbAuthToken, decodeJwtPayload } from '@nebular/auth';
+import { NbAuthService } from '@nebular/auth';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -29,14 +29,9 @@ export class AuthGuard implements CanActivate {
 
           }else{
             this.userService.getCurrentUser()
-              .subscribe(result => { //console.log(result)
-                //this.userStore.setUser(result)
+              .subscribe(result => { 
                 result.is_patient? this.router.navigate(['/patient']): this.router.navigate(['/doctor']);
               })
-
-            // this.user = this.userStore.getUser()
-            // console.log(this.user)
-            // this.user.is_patient? this.router.navigate(['/patient']): this.router.navigate(['/doctor']);
 
           }
         }),

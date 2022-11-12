@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { User, UserData } from '../../core/interfaces/users';
+import { User } from '../../core/interfaces/users';
 import { tap } from 'rxjs/operators';
 import { UserStore } from '../../core/stores/user.store';
 import { Injectable } from '@angular/core';
@@ -12,7 +12,6 @@ export class InitUserService {
     constructor(
         protected userStore: UserStore,
         protected usersService: UsersService,
-        // protected profileServie : ProfileData,
         protected themeService: NbThemeService) { }
 
     initCurrentUser(): Observable<User> {
@@ -23,17 +22,5 @@ export class InitUserService {
                 }
             }));
     }//end initCurrentUser
-
-
-    // initCurrentProfile(): Observable<Profile> {
-    //   return this.profileServie.getCurrentProfile()
-    //         .pipe(tap((profile: Profile) => {
-    //             if (profile) {
-    //                 if (profile.settings && profile.settings.themeName) {
-    //                   this.themeService.changeTheme(profile.settings.themeName);
-    //                 }
-    //             }
-    //         }));
-    // }//end initCurrentUser
 
 }

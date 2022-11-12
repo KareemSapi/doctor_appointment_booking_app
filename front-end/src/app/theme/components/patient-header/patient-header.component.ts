@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NbSearchService } from '@nebular/theme';
 import { SearchService } from 'src/app/core/backend/services/search.service';
 
@@ -21,13 +21,13 @@ export class PatientHeaderComponent implements OnInit {
       .subscribe((data: any) => {
         this.search.updateTerms(data.term)
         this.terms = data.term
-        //console.log(this.terms)
+        
       })
   }
 
   ngOnInit(): void {
     this.search.currentTerm.subscribe((msg: any) => this.terms = msg)
-    //console.log(this.terms)
+   
   }
 
 }

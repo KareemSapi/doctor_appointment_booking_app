@@ -5,7 +5,6 @@ import {
   NB_AUTH_OPTIONS, 
   NbAuthService, 
   NbAuthResult,
-  NbAuthJWTToken,
   NbTokenService 
   } from '@nebular/auth';
 import { getDeepFromObject } from '../../helpers';

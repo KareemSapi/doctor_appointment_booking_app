@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PatientsApi } from '../api/patient.api';
-import { NbAuthService } from '@nebular/auth';
-import { Observable, of } from 'rxjs';
-import { switchMap, map } from 'rxjs';
-import { Patient } from '../../interfaces/patient';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'

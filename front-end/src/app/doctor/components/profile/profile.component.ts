@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DoctorsService } from 'src/app/core/backend/services/doctors.service';
 
@@ -16,7 +15,6 @@ export class ProfileComponent implements OnInit {
  isPostTitleRequired: boolean = true;
  isPostTextRequired : boolean = true;
  submitted          = false;
- //disabled           = false;
  errors             : string[] = [];
  messages           : string[] = [];  
  profileForm!: FormGroup;
@@ -30,9 +28,7 @@ export class ProfileComponent implements OnInit {
   private router          : Router,
   private route           : ActivatedRoute,
   private doctorService   : DoctorsService
-  ){
-  const userId : any = this.route.snapshot.paramMap.get('id');
-  }
+  ){}
 
    //Form getters
    get firstName() { return this.profileForm.get('firstName'); }
@@ -117,7 +113,7 @@ export class ProfileComponent implements OnInit {
         setTimeout(() => {
          this.loading = false 
         }, 3000);
-        return;
+
       }else{
         this.profileForm.reset();
         this.router.navigate(['/doctor/profile'])
