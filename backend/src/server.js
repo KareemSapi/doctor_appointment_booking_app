@@ -16,6 +16,7 @@ const config = require('config');
 const sequelize = require('./db/postgreClient');
 const cors = require('cors');
 const passport = require('passport');
+const path = require('path');
 // const seedService = require('./api/models/seedService')
 
 require('./passport');
@@ -32,6 +33,8 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 app.disable("x-powered-by");
 // seedService
+
+app.use(express.static('./dist/front-end'))
 
 function logErrors(err, req, res, next) {
     logger.error(err);
@@ -55,7 +58,7 @@ const doctorRouter = require('./api/routes/doctor');
 
 const app_name = "Doctor Appointment App" || config.get('app_details.name');
 const { port, root } = config.get('api');
-const PORT = 8081 || port
+const PORT = process.env.PORT || 8081
 const auth = passport.authenticate('jwt', {session: false})
 
 app.use(`${root}/auth`, authRouter);
@@ -73,7 +76,7 @@ app.use(logErrors);
 app.use(clientErrorHandler);
 
 app.get('/', (req,res) => {
-    res.send("Welcome to " + app_name || process.env.APP_NAME)
+    res.sendFile(path.join(__dirname, '/dist/front-end/index.html'))
 })
 
 app.listen(PORT, logger.info(`Server started listening on port: ${PORT}`))
